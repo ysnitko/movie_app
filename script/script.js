@@ -1,13 +1,10 @@
+const select = document.querySelector('#sorting');
 loadMore();
-async function loadUser(count) {
-  const response = await fetch(`https://swapi.dev/api/films/${count}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-    },
-  });
+
+async function loadUser(num) {
+  const response = await fetch(`https://swapi.dev/api/films/${num}`);
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
   return data;
 }
 
@@ -21,13 +18,13 @@ async function loadMore() {
     loadUser(5),
     loadUser(6),
   ];
-  console.log(promises);
   let movieList = await Promise.all(promises);
   movieList
     .map((movie) => {
       const linkMovie = document.createElement('a');
       linkMovie.classList.add('movie-item');
       linkMovie.setAttribute('href', '');
+      linkMovie.setAttribute('data-id', `${movie.episode_id}`);
       const movieCover = MOVIE_COVER.find(
         (cover) => cover.id === movie.episode_id
       );
@@ -50,4 +47,61 @@ async function loadMore() {
 
 // function restoreUsers() {
 //   return JSON.parse(localStorage.getItem('userList'));
-// }
+//
+
+function OnSortingChange() {
+  const movieItems = document.querySelector('.movie-items');
+  const movieList = Array.from(document.querySelectorAll('.movie-item'));
+  if (select.selectedIndex === 0) {
+    movieList.sort((a, b) => {
+      return a.dataset.id - b.dataset.id;
+    });
+  }
+
+  if (select.selectedIndex === 1) {
+    movieList.sort((a, b) => {
+      const movieTitleA = a.querySelector('.movie-title').textContent;
+      const movieTitleB = b.querySelector('.movie-title').textContent;
+      if (movieTitleA < movieTitleB) {
+        return -1;
+      }
+      if (movieTitleB > movieTitleA) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+
+  if (select.selectedIndex === 2) {
+    movieList.sort((a, b) => {
+      const releaseDateA = new Date(
+        a.querySelector('.movie-created span').textContent.split(' ').slice(-1)
+      );
+      console.log(
+        a.querySelector('.movie-created span').textContent.split(' ').slice(-1)
+      );
+      const releaseDateB = new Date(
+        b.querySelector('.movie-created span').textContent.split(' ').slice(-1)
+      );
+      return releaseDateA - releaseDateB;
+    });
+  }
+  storeUser();
+  movieItems.innerHTML = '';
+  movieList.forEach((movie) => {
+    movieItems.appendChild(movie);
+  });
+}
+
+function storeUser() {
+  localStorage.setItem(
+    'dataStorage',
+    JSON.stringify({
+      select: select.selectedIndex,
+    })
+  );
+}
+
+function restoreUsers() {
+  return JSON.parse(localStorage.getItem('dataStorage'));
+}

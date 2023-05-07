@@ -49,6 +49,7 @@ header {
   border: 1px solid #ccc;
   background-color: transparent;
   outline: none;
+  font-family: var(--ff-primary);
   color: #ccc;
 }
 
@@ -123,6 +124,7 @@ h2 {
   gap: 10px;
   cursor: pointer;
   text-decoration: none;
+  
 }
 
 .movie-info {
@@ -132,6 +134,11 @@ h2 {
 .movie-title {
   margin-bottom: 10px;
   font-weight: 700;
+ 
+}
+
+.movie-title span {
+  color: var(--clr-secondary);
 }
 
 .movie-created,
@@ -140,12 +147,8 @@ h2 {
   opacity: 0.5;
 }
 
-/* .movie-cover {
-  width: 100%;
-} */
 
-  /* The slider */
-  .slider {
+.slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -157,7 +160,7 @@ h2 {
     transition: .4s;
   }
   
-  .slider:before {
+.slider:before {
     position: absolute;
     content: "";
     height: 15px;
@@ -188,7 +191,6 @@ h2 {
     transform: translateX(18px);
   }
   
-  /* Rounded sliders */
   .slider.round {
     width: 40px;
     height: 20px;
