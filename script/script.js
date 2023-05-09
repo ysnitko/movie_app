@@ -1,8 +1,11 @@
 const select = document.querySelector('#sorting');
+const toggleLayout = document.querySelector('.action-toggle-layout');
 loadMore();
 
-async function loadUser(num) {
-  const response = await fetch(`https://swapi.dev/api/films/${num}`);
+async function loadUser() {
+  const response = await fetch(
+    `https://desfarik.github.io/star-wars/api/film/all.json`
+  );
   const data = await response.json();
   // console.log(data);
   return data;
@@ -10,15 +13,8 @@ async function loadUser(num) {
 
 async function loadMore() {
   const movieItems = document.querySelector('.movie-items');
-  const promises = [
-    loadUser(1),
-    loadUser(2),
-    loadUser(3),
-    loadUser(4),
-    loadUser(5),
-    loadUser(6),
-  ];
-  let movieList = await Promise.all(promises);
+  const promises = loadUser();
+  let movieList = await Promise.resolve(promises);
   movieList
     .map((movie) => {
       const linkMovie = document.createElement('a');
@@ -29,9 +25,13 @@ async function loadMore() {
         (cover) => cover.id === movie.episode_id
       );
       html = `
-      <img src="${movieCover.src}" class="movie-cover" alt="movie">
+      <div class="img-container">
+      <img src="${movieCover.src}" class="movie-cover" alt="movie"> 
+      <span class="movie-rating">${movieCover.rating}<span> 
+      </div>
       <div class="movie-info">
         <div class="movie-title"><span>${movie.title}</span></div>
+        <div class="movie-crawl"><span>${movie.opening_crawl}</span></div>
         <div class="movie-created"><span>Release date: ${movie.release_date}</span></div>
         <div class="movie-episode"><span>Episode: ${movie.episode_id}</span></div>
       </div>`;
@@ -77,9 +77,6 @@ function OnSortingChange() {
       const releaseDateA = new Date(
         a.querySelector('.movie-created span').textContent.split(' ').slice(-1)
       );
-      console.log(
-        a.querySelector('.movie-created span').textContent.split(' ').slice(-1)
-      );
       const releaseDateB = new Date(
         b.querySelector('.movie-created span').textContent.split(' ').slice(-1)
       );
@@ -91,6 +88,69 @@ function OnSortingChange() {
   movieList.forEach((movie) => {
     movieItems.appendChild(movie);
   });
+}
+
+// change layout
+function OnChangeLayout(event) {
+  let target = event.target;
+  const movieItems = document.querySelector('.movie-items');
+  const movieItem = document.querySelectorAll('.movie-item');
+  const movieCrawl = document.querySelectorAll('.movie-crawl');
+  if (target.classList.contains('toggle-tile')) {
+    movieItems.classList.add('active-layout');
+    movieItem.forEach((item) => {
+      item.classList.add('active-item');
+    });
+    movieCrawl.forEach((item) => {
+      item.style.display = 'block';
+    });
+  } else if (target.classList.contains('toggle-rows')) {
+    movieItems.classList.remove('active-layout');
+    movieItem.forEach((item) => {
+      item.classList.remove('active-item');
+    });
+    movieCrawl.forEach((item) => {
+      item.style.display = '-webkit-box';
+    });
+  }
+}
+
+toggleLayout.addEventListener('click', OnChangeLayout);
+
+// search
+
+async function searchItems() {
+  const searchInput = document.querySelector('#search-input');
+  const phrase = searchInput.value.toLowerCase().trim();
+  console.log(phrase);
+  const movieItems = document.querySelector('.movie-items');
+  movieItems.innerHTML = '';
+  const movieList = await loadUser();
+  movieList
+    .filter((movie) => {
+      return movie.title.toLowerCase().includes(phrase);
+    })
+    .forEach((movie) => {
+      const linkMovie = document.createElement('a');
+      linkMovie.classList.add('movie-item');
+      linkMovie.setAttribute('href', '');
+      linkMovie.setAttribute('data-id', `${movie.episode_id}`);
+      const movieCover = MOVIE_COVER.find(
+        (cover) => cover.id === movie.episode_id
+      );
+      html = `
+      <div class="img-container">
+      <img src="${movieCover.src}" class="movie-cover" alt="movie"> 
+      </div>
+      <div class="movie-info"> 
+        <div class="movie-title"><span>${movie.title}</span></div> 
+        <div class="movie-crawl"><span>${movie.opening_crawl}</span></div> 
+        <div class="movie-created"><span>Release date: ${movie.release_date}</span></div> 
+        <div class="movie-episode"><span>Episode: ${movie.episode_id}</span></div> 
+      </div>`;
+      linkMovie.innerHTML = html;
+      movieItems.appendChild(linkMovie);
+    });
 }
 
 function storeUser() {

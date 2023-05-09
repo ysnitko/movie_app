@@ -15,7 +15,9 @@
             <a href="#" class="header-logo">
                 <img src="./img/logo.png" alt="">
             </a>
-            <input type="search" id="search" placeholder="Search">
+            <form action="" class="search-form">
+                <input type="search" id="search-input" placeholder="Search" onchange="searchItems()">
+            </form>
             <div class="header-elements">
                 <div class="color-scheme-toggle">
                     <label class="switch">
@@ -39,12 +41,8 @@
                     </select>
                 </div>
                 <div class="action-toggle-layout">
-                    <button class="toggle-column"><span class="material-symbols-outlined">
-                        view_list
-                    </span></button>
-                    <button class="toggle-rows"><span class="material-symbols-outlined">
-                        view_column
-                    </span></button>
+                    <button class="toggle-rows"></button>
+                    <button class="toggle-tile"></button>
                 </div>
             </div>
             <div class="movie-items">
