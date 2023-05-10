@@ -1,5 +1,6 @@
 const select = document.querySelector('#sorting');
 const toggleLayout = document.querySelector('.action-toggle-layout');
+
 loadMore();
 
 async function loadUser() {
@@ -7,7 +8,6 @@ async function loadUser() {
     `https://desfarik.github.io/star-wars/api/film/all.json`
   );
   const data = await response.json();
-  // console.log(data);
   return data;
 }
 
@@ -27,7 +27,8 @@ async function loadMore() {
       html = `
       <div class="img-container">
       <img src="${movieCover.src}" class="movie-cover" alt="movie"> 
-      <span class="movie-rating">${movieCover.rating}<span> 
+      <span class="movie-rating">${movieCover.rating}</span> 
+      <button class="add-favorites"></button>
       </div>
       <div class="movie-info">
         <div class="movie-title"><span>${movie.title}</span></div>
@@ -39,15 +40,8 @@ async function loadMore() {
       return linkMovie;
     })
     .forEach((movie) => movieItems.appendChild(movie));
+    OnSortingChange() 
 }
-
-// function storeUser() {
-//   localStorage.setItem('userList', JSON.stringify(userList));
-// }
-
-// function restoreUsers() {
-//   return JSON.parse(localStorage.getItem('userList'));
-//
 
 function OnSortingChange() {
   const movieItems = document.querySelector('.movie-items');
@@ -57,37 +51,54 @@ function OnSortingChange() {
       return a.dataset.id - b.dataset.id;
     });
   }
-
   if (select.selectedIndex === 1) {
-    movieList.sort((a, b) => {
-      const movieTitleA = a.querySelector('.movie-title').textContent;
-      const movieTitleB = b.querySelector('.movie-title').textContent;
-      if (movieTitleA < movieTitleB) {
-        return -1;
-      }
-      if (movieTitleB > movieTitleA) {
-        return 1;
-      }
-      return 0;
-    });
-  }
-
+      movieList.sort((a, b) => {
+      return b.dataset.id - a.dataset.id;
+  })
+};
   if (select.selectedIndex === 2) {
+      movieList.sort((a, b) => {
+      const movieTitleA = a.querySelector('.movie-title span').textContent;
+      const movieTitleB = b.querySelector('.movie-title span').textContent;
+      if (movieTitleA > movieTitleB) {
+                return 1;
+              }
+  })}
+  if (select.selectedIndex === 3) {
     movieList.sort((a, b) => {
-      const releaseDateA = new Date(
-        a.querySelector('.movie-created span').textContent.split(' ').slice(-1)
-      );
-      const releaseDateB = new Date(
-        b.querySelector('.movie-created span').textContent.split(' ').slice(-1)
-      );
-      return releaseDateA - releaseDateB;
-    });
-  }
-  storeUser();
-  movieItems.innerHTML = '';
+    const movieTitleA = a.querySelector('.movie-title span').textContent;
+    const movieTitleB = b.querySelector('.movie-title span').textContent;
+    if (movieTitleB > movieTitleA) {
+              return 1;
+            }
+})}
+if (select.selectedIndex === 4) {
+      movieList.sort((a, b) => {
+        const releaseDateA = new Date(
+          a.querySelector('.movie-created span').textContent.split(' ').slice(-1)
+        );
+        const releaseDateB = new Date(
+          b.querySelector('.movie-created span').textContent.split(' ').slice(-1)
+        );
+        return releaseDateA - releaseDateB;
+      });
+}
+if (select.selectedIndex === 5) {
+  movieList.sort((a, b) => {
+    const releaseDateA = new Date(
+      a.querySelector('.movie-created span').textContent.split(' ').slice(-1)
+    );
+    const releaseDateB = new Date(
+      b.querySelector('.movie-created span').textContent.split(' ').slice(-1)
+    );
+    return releaseDateB - releaseDateA;
+  });
+}
+movieItems.innerHTML = '';
   movieList.forEach((movie) => {
     movieItems.appendChild(movie);
   });
+  
 }
 
 // change layout
@@ -118,11 +129,10 @@ function OnChangeLayout(event) {
 toggleLayout.addEventListener('click', OnChangeLayout);
 
 // search
-
-async function searchItems() {
+async function searchItems(event) {
+  event.preventDefault()
   const searchInput = document.querySelector('#search-input');
   const phrase = searchInput.value.toLowerCase().trim();
-  console.log(phrase);
   const movieItems = document.querySelector('.movie-items');
   movieItems.innerHTML = '';
   const movieList = await loadUser();
@@ -141,12 +151,14 @@ async function searchItems() {
       html = `
       <div class="img-container">
       <img src="${movieCover.src}" class="movie-cover" alt="movie"> 
+      <span class="movie-rating">${movieCover.rating}</span> 
+      <button class="add-favorites"></button>
       </div>
-      <div class="movie-info"> 
-        <div class="movie-title"><span>${movie.title}</span></div> 
-        <div class="movie-crawl"><span>${movie.opening_crawl}</span></div> 
-        <div class="movie-created"><span>Release date: ${movie.release_date}</span></div> 
-        <div class="movie-episode"><span>Episode: ${movie.episode_id}</span></div> 
+      <div class="movie-info">
+        <div class="movie-title"><span>${movie.title}</span></div>
+        <div class="movie-crawl"><span>${movie.opening_crawl}</span></div>
+        <div class="movie-created"><span>Release date: ${movie.release_date}</span></div>
+        <div class="movie-episode"><span>Episode: ${movie.episode_id}</span></div>
       </div>`;
       linkMovie.innerHTML = html;
       movieItems.appendChild(linkMovie);
@@ -164,4 +176,17 @@ function storeUser() {
 
 function restoreUsers() {
   return JSON.parse(localStorage.getItem('dataStorage'));
+}
+
+function toggleTheme() {
+
+ const link = document.querySelector('link');
+ const checked = document.querySelector('#checkbox')
+if (checked.checked) {
+  link.setAttribute('href', './style/dark-theme.css')
+}
+else {
+  link.setAttribute('href', './style/style.css')
+}
+ 
 }

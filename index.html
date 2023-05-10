@@ -5,52 +5,68 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="//unpkg.com/a11y-slider@latest/dist/a11y-slider.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
     <header> 
-        <div class="header-content">
-            <a href="#" class="header-logo">
-                <img src="./img/logo.png" alt="">
-            </a>
-            <form action="" class="search-form">
-                <input type="search" id="search-input" placeholder="Search" onchange="searchItems()">
-            </form>
-            <div class="header-elements">
-                <div class="color-scheme-toggle">
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider round"></span>
-                      </label>
+        <div class="header-container">
+            <div class="header-content">
+                <a href="" class="header-logo">
+                    <img src="./img/logo.png" alt="">
+                </a>
+                <form action="" class="search-form" onsubmit="searchItems(event)">
+                    <input type="search" id="search-input" placeholder="Search">
+                </form>
+                <div class="header-elements">
+                    <div class="color-scheme-toggle">
+                        <label class="switch">
+                            <input type="checkbox" id="checkbox" onchange="toggleTheme()">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <button type="button" class="authorization"></button>
                 </div>
-                <button type="button" class="authorization"></button>
-            </div>
-        </div>  
+            </div> 
+         </div> 
+       
      </header>
     <div class="container">
-        <section class="movies-container">
-            <div class="action-on-movies">
-                <div class="action-sorting">
-                    <span>Sort by:</span>
-                    <select name="" id="sorting" onchange="OnSortingChange()">
-                        <option value="1">episode </option>
-                        <option value="2">name</option>
-                        <option value="3">release date</option>
-                    </select>
+                <ul class="main-navigation">
+                    <li><a href="">Main</a></li>
+                    <li><a href="">Categories</a></li>
+                    <li><a href="">Newest 2023</a></li>
+                    <li><a href="">Download</a></li>
+                    <li><a href="">Last reviews</a></li>
+                    <li><a href="">NEW!!! Serials</a></li>
+                </ul>
+                <div class="movies-container">
+                    <div class="action-on-movies">
+                        <div class="action-sorting">
+                            <span>Sort by:</span>
+                            <select name="" id="sorting" onchange="OnSortingChange()">
+                                <option value="1">Episode (0-9) </option>
+                                <option value="2">Episode (9-0) </option>
+                                <option value="3">Title (A-Z)</option>
+                                <option value="4">Title (Z-A)</option>
+                                <option value="5">Release date (Oldest)</option>
+                                <option value="6">Release date (Newest)</option>
+                            </select>
+                        </div>
+                        <div class="action-toggle-layout">
+                            <button class="toggle-rows"></button>
+                            <button class="toggle-tile"></button>
+                        </div>
+                    </div>
+                <div class="movie-items"></div>
                 </div>
-                <div class="action-toggle-layout">
-                    <button class="toggle-rows"></button>
-                    <button class="toggle-tile"></button>
-                </div>
-            </div>
-            <div class="movie-items">
-            </div>
-        </section>
+       
+        
     </div>    
     <script src="./script/data.js"></script>
     <script src="./script/script.js"></script>
+
+ 
+
 
 </body>
 </html>
