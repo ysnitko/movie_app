@@ -30,6 +30,10 @@ main {
   background-color: var(--clr-rating-text);
 }
 
+.menu-section {
+  
+}
+
 /* header */
 
 .header-content {
@@ -335,6 +339,9 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+
+
+
 /* footer */
 footer {
   display: flex;
@@ -343,6 +350,7 @@ footer {
   justify-content: center;
   padding: 40px 0 10px 0;
   gap: 30px;
+  background: url(../img/charliechaplin-colourver.svg) no-repeat left top;
   background-color: var(--clr-secondary);
 }
 
