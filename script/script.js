@@ -1,29 +1,29 @@
 const select = document.querySelector('#sorting');
 const toggleLayout = document.querySelector('.action-toggle-layout');
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get('id') || 'all';
 
-loadMore();
+loadMore(id);
 
-async function loadMovie(movie = 'all') {
+async function loadMovie(id) {
   const response = await fetch(
-    `https://desfarik.github.io/star-wars/api/film/${movie}.json`
+    `https://desfarik.github.io/star-wars/api/film/${id}.json`
   );
   const data = await response.json();
   return data;
 }
 
-async function loadMore(movie) {
+async function loadMore(id) {
   const movieItems = document.querySelector('.movie-items');
-  const promises = loadMovie(movie);
+  const promises = loadMovie(id);
   let movieList = await Promise.resolve(promises);
   movieList
     .map((movie) => {
       const linkMovie = document.createElement('a');
       linkMovie.classList.add('movie-item');
       linkMovie.setAttribute('data-id', `${movie.id}`);
-      linkMovie.setAttribute(
-        'href',
-        `https://desfarik.github.io/star-wars/api/film/${movie.id}.json`
-      );
+      linkMovie.setAttribute('href', `index.html?id=${movie.id}`);
+      // linkMovie.setAttribute('target', `_blank`);
       const movieCover = MOVIE_COVER.find((cover) => cover.id === movie.id);
       html = `
       <div class="img-container">
@@ -38,22 +38,15 @@ async function loadMore(movie) {
         <div class="movie-episode"><span>Episode: ${movie.episode_id}</span></div>
       </div>`;
       linkMovie.innerHTML = html;
-      linkMovie.addEventListener('click', renderMovie);
       return linkMovie;
     })
     .forEach((movie) => movieItems.appendChild(movie));
-
   OnSortingChange();
 }
 
-async function renderMovie(event) {
-  event.preventDefault(); // Предотвращаем переход по ссылке
-  const target = event.currentTarget; // Получаем элемент, на котором произошло событие
-  const movieId = target.dataset.id; // Получаем ID фильма из атрибута data-id
-  const movie = await loadMovie(movieId); // Получаем данные о фильме
-  const movieItems = document.querySelector('.movie-items');
+async function renderMovie(id) {
+  const movie = await loadMovie(id);
   const movieContainer = document.querySelector('.movies-container');
-  movieItems.innerHTML = '';
   const linkMovie = document.createElement('div');
 
   linkMovie.classList.add('movie-item');
@@ -74,6 +67,7 @@ async function renderMovie(event) {
 </div>`;
   movieContainer.innerHTML = html;
 }
+renderMovie(id);
 
 function OnSortingChange() {
   const movieItems = document.querySelector('.movie-items');

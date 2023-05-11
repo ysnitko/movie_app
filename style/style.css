@@ -7,7 +7,6 @@
   --clr-rating-background: #25af60;
   --clr-rating-text: #ffffff;
   --ff-primary: 'Roboto', sans-serif;
-
 }
 
 body {
@@ -20,7 +19,6 @@ body {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  
 }
 
 main {
@@ -28,10 +26,6 @@ main {
   min-height: 100vh;
   grid-template-columns: 180px 1fr;
   background-color: var(--clr-rating-text);
-}
-
-.menu-section {
-  
 }
 
 /* header */
@@ -237,7 +231,7 @@ main {
 
 .img-container:hover {  
   transform: scale(1.01);
-  transition: 0.4s;
+  transition: 0.8s;
   box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.4);
 }
 
@@ -338,9 +332,6 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
-
-
-
 
 /* footer */
 footer {
