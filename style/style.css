@@ -28,6 +28,11 @@ main {
   background-color: var(--clr-rating-text);
 }
 
+h3 {
+  margin-bottom: 10px;
+  color: var(--clr-secondary);
+}
+
 /* header */
 
 .header-content {

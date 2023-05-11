@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie app</title>
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+<body>
+    <div class="container">
+    <header> 
+        <div class="header-container">
+            <div class="header-content">
+                <a href="index.html" class="header-logo">
+                    <img src="./img/logo.png" alt="">
+                </a>
+                <form action="" class="search-form" onsubmit="searchItems(event)">
+                    <input type="search" id="search-input" placeholder="Search">
+                </form>
+                <div class="header-elements">
+                    <div class="color-scheme-toggle">
+                        <label class="switch">
+                            <input type="checkbox" id="checkbox" onchange="toggleTheme()">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <button type="button" class="authorization"></button>
+                </div>
+            </div> 
+         </div> 
+       
+     </header>
+    <main class="main-container">
+        <div class="menu-section">
+            <ul class="main-navigation">
+                <li><a href="">Main</a></li>
+                <li><a href="">Categories</a></li>
+                <li><a href="">Newest 2023</a></li>
+                <li><a href="">Download</a></li>
+                <li><a href="">Last reviews</a></li>
+                <li><a href="">NEW!!! Serials</a></li>
+            </ul>
+        </div>
+        <div class="movies-container">
+            <div class="movie-">
+                <div class="img-container"> 
+                <img src="./img/a_new_hope.jpg" class="movie-cover" alt="movie">  
+                <span class="movie-rating">${movieCover.rating}</span>  
+                </div> 
+                <div class="movie-info"> 
+                <div class="movie-title"><span>dsdsd</span></div> 
+                <div class="movie-crawl"><span>dsadsdd</span></div> 
+                <div class="movie-created"><span>dadsdsd</span></div> 
+                <div class="movie-episode"><span>dsds</span></div> 
+                </div>
+                </div>
+        </div>
+    </main>    
+    <footer>
+        <ul class="social-links">
+            <li><a href=""><img src="./img/facebook.svg" alt=""></a></li>
+            <li><a href=""><img src="./img/instagram.svg" alt=""></a></li>
+            <li><a href=""><img src="./img/twitter.svg" alt=""></a></li>
+            <li><a href=""><img src="./img/youtube.svg" alt=""></a></li>
+        </ul>
+        <div class="conditions-links">
+            <a href="">Conditions of Use</a>
+            <a href="">Privacy &AMP; Policy</a>
+            <a href="">Press Room</a>
+        </div>
+        <p class="copyrigth">&COPY; 2023 by Yuri Snitko</p>
+    </footer>
+    <script src="./script/data.js"></script>
+    <!-- <script src="./script/script.js"></script> -->
+</div>
+</body>
+</html>

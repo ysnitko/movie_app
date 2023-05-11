@@ -23,7 +23,6 @@ async function loadMore(id) {
       linkMovie.classList.add('movie-item');
       linkMovie.setAttribute('data-id', `${movie.id}`);
       linkMovie.setAttribute('href', `index.html?id=${movie.id}`);
-      // linkMovie.setAttribute('target', `_blank`);
       const movieCover = MOVIE_COVER.find((cover) => cover.id === movie.id);
       html = `
       <div class="img-container">
