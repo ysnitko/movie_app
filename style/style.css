@@ -13,13 +13,19 @@
 body {
   background: linear-gradient(180deg, rgba(25,104,117,1) 0%, rgba(255,0,228,1) 100%);
   background-attachment: fixed;
+  font-family: var(--ff-primary);
 }
 
+
 .container {
-  display: grid;
   max-width: 1200px;
   margin: 0 auto;
-  font-family: var(--ff-primary);
+  
+}
+
+main {
+  display: grid;
+  min-height: 100vh;
   grid-template-columns: 180px 1fr;
   background-color: var(--clr-rating-text);
 }
@@ -31,8 +37,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
   padding: 10px;
   background-color: var(--clr-secondary); 
 }
@@ -76,7 +80,7 @@ body {
   border: 1px solid #ccc;
   background-color: transparent;
   outline: none;
-  font-family: var(--ff-primary);
+
   color: #ccc;
   
 }
@@ -139,10 +143,6 @@ body {
 }
 
 /* h2 */
-h2 {
-  font-family: var(--ff-primary);
-  color: var(--clr-secondary);
-}
 
 /* toggle theme */
 /* The switch - the box around the slider */
@@ -165,14 +165,13 @@ h2 {
 
 .main-navigation {
   padding: 0;
-  margin: 0;
+  margin-top: 10px;
   list-style-type: none;
-  background-color: var(--clr-secondary);
-  color: var(--clr-primary);
 }
 
 .main-navigation li {
   padding: 4px 10px;
+
 }
 
 .main-navigation li a {
@@ -183,7 +182,7 @@ h2 {
   background-size: 0% 2px;
   transition: background-size .3s;
   text-decoration: none;
-  color: var(--clr-primary);
+  color: var(--clr-secondary);
 }
   
 .main-navigation li a:hover {
@@ -236,13 +235,11 @@ h2 {
   transform: scale(1.01);
   transition: 0.4s;
   box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.4);
-
 }
-
 
 .add-favorites {
   position: absolute;
-  bottom: 25px;
+  bottom: 15px;
   right: 10px;
   width: 25px;
   height: 25px;
@@ -308,7 +305,6 @@ h2 {
     width: 15px;
     left: 4px;
     bottom: 3px;
-    /* background-color:  #f9f8f8; */
     background: url(../img/sun.svg) no-repeat center;
     -webkit-transition: .4s;
     transition: .4s;
@@ -337,4 +333,39 @@ input:checked + .slider:before {
   
 .slider.round:before {
   border-radius: 50%;
+}
+
+/* footer */
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0 10px 0;
+  gap: 30px;
+  background-color: var(--clr-secondary);
+}
+
+.social-links {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  gap: 20px;
+  list-style-type: none;
+}
+
+.conditions-links {
+  display: flex;
+  gap: 40px;
+}
+.conditions-links a {
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--clr-primary);
+}
+
+.copyrigth {
+  font-size: 12px;
+  color: var(--clr-primary);
 }

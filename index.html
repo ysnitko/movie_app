@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Movie app</title>
     <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
+    <div class="container">
     <header> 
         <div class="header-container">
             <div class="header-content">
@@ -30,43 +31,56 @@
          </div> 
        
      </header>
-    <div class="container">
-                <ul class="main-navigation">
-                    <li><a href="">Main</a></li>
-                    <li><a href="">Categories</a></li>
-                    <li><a href="">Newest 2023</a></li>
-                    <li><a href="">Download</a></li>
-                    <li><a href="">Last reviews</a></li>
-                    <li><a href="">NEW!!! Serials</a></li>
-                </ul>
-                <div class="movies-container">
-                    <div class="action-on-movies">
-                        <div class="action-sorting">
-                            <span>Sort by:</span>
-                            <select name="" id="sorting" onchange="OnSortingChange()">
-                                <option value="1">Episode (0-9) </option>
-                                <option value="2">Episode (9-0) </option>
-                                <option value="3">Title (A-Z)</option>
-                                <option value="4">Title (Z-A)</option>
-                                <option value="5">Release date (Oldest)</option>
-                                <option value="6">Release date (Newest)</option>
-                            </select>
-                        </div>
-                        <div class="action-toggle-layout">
-                            <button class="toggle-rows"></button>
-                            <button class="toggle-tile"></button>
-                        </div>
-                    </div>
-                <div class="movie-items"></div>
+    <main class="main-container">
+        <div class="menu-section">
+            <ul class="main-navigation">
+                <li><a href="">Main</a></li>
+                <li><a href="">Categories</a></li>
+                <li><a href="">Newest 2023</a></li>
+                <li><a href="">Download</a></li>
+                <li><a href="">Last reviews</a></li>
+                <li><a href="">NEW!!! Serials</a></li>
+            </ul>
+        </div>
+        <div class="movies-container">
+            <div class="action-on-movies">
+                <div class="action-sorting">
+                    <span>Sort by:</span>
+                    <select name="" id="sorting" onchange="OnSortingChange()">
+                        <option value="1">Episode (0-9) </option>
+                        <option value="2">Episode (9-0) </option>
+                        <option value="3">Title (A-Z)</option>
+                        <option value="4">Title (Z-A)</option>
+                        <option value="5">Release date (Oldest)</option>
+                        <option value="6">Release date (Newest)</option>
+                    </select>
                 </div>
-       
-        
-    </div>    
+                <div class="action-toggle-layout">
+                    <button class="toggle-rows"></button>
+                    <button class="toggle-tile"></button>
+                </div>
+            </div>
+            <div class="movie-items"></div>
+        </div>
+    </main>    
+    <footer>
+        <ul class="social-links">
+            <li><a href=""><img src="./img/facebook.svg" alt=""></a></li>
+            <li><a href=""><img src="./img/instagram.svg" alt=""></a></li>
+            <li><a href=""><img src="./img/twitter.svg" alt=""></a></li>
+            <li><a href=""><img src="./img/youtube.svg" alt=""></a></li>
+        </ul>
+        <div class="conditions-links">
+            <a href="">Conditions of Use</a>
+            <a href="">Privacy &AMP; Policy</a>
+            <a href="">Press Room</a>
+        </div>
+        <p class="copyrigth">&COPY; 2023 by Yuri Snitko</p>
+    </footer>
     <script src="./script/data.js"></script>
+    
     <script src="./script/script.js"></script>
-
- 
-
-
+    <!-- <script src="./script/fetch_movie.js"></script> -->
+</div>
 </body>
 </html>
