@@ -51,7 +51,7 @@ async function renderMovie(id) {
       <span>Star Wars: ${movie.title}. Episode ${movie.episode_id}</span>
       <a class="add-favorites"><img src="./img/bookmark-add.svg" alt=""><span>Add to favorites</span></a>
   </div>
-  <img class="img-about" src="${movieCover.src}" alt="">
+  <img class="img-about" src="${movieCover.src_}" alt="">
   <div class="movie-additional-info">
       <div class="realese-reating-info">
           <span>Release date: ${movie.release_date}</span>
@@ -97,9 +97,16 @@ async function loadMovieCharacters(id) {
     })
     .map((character) => {
       const characteritem = document.createElement('a');
+      characteritem.classList.add('character-link');
       const html = `  
-    <img src="" alt=""> 
-    <span>birth_year:${character.films}</span>`;
+      <div>
+      <img src="${character.image}" class="movie-cover" alt="movie"> 
+      </div>
+      <div class="character-info">
+        <div class="character-title"><span>${character.name}</span></div>
+        <div class="character-crawl"><span>${character.gender}</span></div>
+        <div class="character-created"><span>Release date: ${character.species}</span></div>
+      </div>`;
       characteritem.innerHTML = html;
       return characteritem;
     })

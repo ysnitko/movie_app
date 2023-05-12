@@ -396,8 +396,10 @@ footer {
 }
 
 .img-about {
-  display: inline-block;
-  height: fit-content;
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  
 }
 
 .movie-additional-info {
@@ -423,3 +425,16 @@ footer {
   text-indent: 18px;
 }
 
+.characters-container {
+  display: grid;
+  grid-template-columns: repeat(auto, 100px);
+}
+
+.character-link {
+  display: flex;
+  flex-direction: column;
+}
+
+.character-link img {
+  width: 10%;
+}
