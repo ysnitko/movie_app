@@ -17,8 +17,8 @@ const MOVIE_COVER = [
   {
     id: 4,
     rating: 7.8,
-    src: '../img/the-phantom-menace.jpg',
-    src_: '../img/Копия 3840x.jpg',
+    src: './img/the-phantom-menace.jpg',
+    src_: './img/the-phantom-menace_about.jpg',
   },
   {
     id: 5,
