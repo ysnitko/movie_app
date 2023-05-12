@@ -16,7 +16,7 @@ async function loadMovie(id) {
 async function loadMore(id) {
   const movieItems = document.querySelector('.movie-items');
   const promises = loadMovie(id);
-  let movieList = await Promise.resolve(promises);
+  let movieList = await promises;
   movieList
     .map((movie) => {
       const linkMovie = document.createElement('a');
@@ -28,7 +28,6 @@ async function loadMore(id) {
       <div class="img-container">
       <img src="${movieCover.src}" class="movie-cover" alt="movie"> 
       <span class="movie-rating">${movieCover.rating}</span> 
-      <button class="add-favorites"></button>
       </div>
       <div class="movie-info">
         <div class="movie-title"><span>${movie.title}</span></div>
@@ -46,39 +45,94 @@ async function loadMore(id) {
 async function renderMovie(id) {
   const movie = await loadMovie(id);
   const movieContainer = document.querySelector('.movies-container');
-  const linkMovie = document.createElement('div');
-
-  linkMovie.classList.add('movie-item');
   const movieCover = MOVIE_COVER.find((cover) => cover.id === movie.id);
-
-  const html = `
-<div class="movie-items">
-<div class="img-container"> 
-<img src="${movieCover.src}" class="movie-cover" alt="movie">  
-<span class="movie-rating">${movieCover.rating}</span>  
-</div> 
-<div class="movie-info"> 
-<div class="movie-title"><span>${movie.title}</span></div> 
-<div class="movie-crawl"><span>${movie.opening_crawl}</span></div> 
-<div class="movie-created"><span>Release date: ${movie.release_date}</span></div> 
-<div class="movie-episode"><span>Episode: ${movie.episode_id}</span></div> 
-</div>
-</div>`;
+  const html = `<div class="movie-about">
+  <div class="movie-header">           
+      <span>Star Wars: ${movie.title}. Episode ${movie.episode_id}</span>
+      <a class="add-favorites"><img src="./img/bookmark-add.svg" alt=""><span>Add to favorites</span></a>
+  </div>
+  <img class="img-about" src="${movieCover.src}" alt="">
+  <div class="movie-additional-info">
+      <div class="realese-reating-info">
+          <span>Release date: ${movie.release_date}</span>
+          <span>Rating IMDb: ${movieCover.rating}</span>
+      </div>
+      <div class="director-produser-info">
+          <span>Directod by: ${movie.director}</span>
+          <span>Produced by: ${movie.producer}</span>
+      </div>
+  </div>
+  <div class="movie-story">
+      <h3>Plot:</h3>
+      <p>${movie.opening_crawl}</p>
+  </div>
+  <div class="characters">
+    <span>Characters:</span>
+    <div class="characters-container"></div>
+  </div>
+`;
   movieContainer.innerHTML = html;
+  loadMovieCharacters(id);
 }
 renderMovie(id);
+
+async function loadCharacter(id) {
+  const response = await fetch(
+    `https://desfarik.github.io/star-wars/api/people/${id}.json`
+  );
+  const data = await response.json();
+  // console.log(data);
+  return data;
+}
+async function loadMovieCharacters(id) {
+  const charactersContainer = document.querySelector('.characters-container');
+  const promises = Array.from({ length: 87 }, (_, i) => loadCharacter(i + 1));
+  let charactersList = await Promise.all(promises);
+  console.log(charactersList);
+  let movie = await loadMovie(id);
+  charactersList
+    .filter((character) => {
+      console.log(character.films);
+      return character.films.includes(`${movie.id}`);
+    })
+    .map((character) => {
+      const characteritem = document.createElement('a');
+      const html = `  
+    <img src="" alt=""> 
+    <span>birth_year:${character.films}</span>`;
+      characteritem.innerHTML = html;
+      return characteritem;
+    })
+    .forEach((character) => charactersContainer.appendChild(character));
+}
 
 function OnSortingChange() {
   const movieItems = document.querySelector('.movie-items');
   const movieList = Array.from(document.querySelectorAll('.movie-item'));
   if (select.selectedIndex === 0) {
     movieList.sort((a, b) => {
-      return a.dataset.id - b.dataset.id;
+      const movieEpisodeA = a
+        .querySelector('.movie-episode span')
+        .textContent.split(' ')
+        .slice(-1);
+      const movieEpisodeB = b
+        .querySelector('.movie-episode span')
+        .textContent.split(' ')
+        .slice(-1);
+      return movieEpisodeA - movieEpisodeB;
     });
   }
   if (select.selectedIndex === 1) {
     movieList.sort((a, b) => {
-      return b.dataset.id - a.dataset.id;
+      const movieEpisodeA = a
+        .querySelector('.movie-episode span')
+        .textContent.split(' ')
+        .slice(-1);
+      const movieEpisodeB = b
+        .querySelector('.movie-episode span')
+        .textContent.split(' ')
+        .slice(-1);
+      return movieEpisodeB - movieEpisodeA;
     });
   }
   if (select.selectedIndex === 2) {

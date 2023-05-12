@@ -6,6 +6,7 @@
   --clr-number-episode: #ff0000;
   --clr-rating-background: #25af60;
   --clr-rating-text: #ffffff;
+  --clr-border-bookmarks: #5abcf5;
   --ff-primary: 'Roboto', sans-serif;
 }
 
@@ -240,16 +241,6 @@ h3 {
   box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.4);
 }
 
-.add-favorites {
-  position: absolute;
-  bottom: 15px;
-  right: 10px;
-  width: 25px;
-  height: 25px;
-  background: url(../img/bookmark-add.svg) no-repeat center;
-  border: none;
-}
-
 .movie-rating {
   display: inline-block;
   padding-inline: 5px;
@@ -373,3 +364,62 @@ footer {
   font-size: 12px;
   color: var(--clr-primary);
 }
+
+/* movie-about */
+.movie-about {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.movie-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.movie-header > span {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--clr-secondary);
+}
+
+.add-favorites {
+  display: flex;
+  padding-inline: 10px;
+  align-items: center;
+  font-size: 14px;
+  border: 1px solid var(--clr-border-bookmarks);
+  border-radius: 2px;
+  color: var(--clr-border-bookmarks);
+  cursor: pointer;
+}
+
+.img-about {
+  display: inline-block;
+  height: fit-content;
+}
+
+.movie-additional-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-inline: 18px;
+}
+
+.director-produser-info,
+.realese-reating-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.movie-story h3 {
+  padding-left: 18px;
+}
+
+.movie-story p {
+  text-indent: 18px;
+}
+
