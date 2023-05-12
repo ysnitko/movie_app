@@ -6,6 +6,7 @@
   --clr-number-episode: #ff0000;
   --clr-rating-background: #25af60;
   --clr-rating-text: #ffffff;
+  --clr-movie-info: #5abcf5;
   --clr-border-bookmarks: #5abcf5;
   --ff-primary: 'Roboto', sans-serif;
 }
@@ -164,7 +165,7 @@ h3 {
   
   /* movie container */
 .movies-container {
-  padding: 10px;
+  padding: 15px 10px;
 }
 
 .main-navigation {
@@ -246,7 +247,7 @@ h3 {
   padding-inline: 5px;
   position: absolute;
   left: 10px;
-  bottom: 25px;
+  bottom: 20px;
   color: var(--clr-rating-text);
   background-color: var(--clr-rating-background);
   font-size: 12px;
@@ -405,8 +406,12 @@ footer {
 .movie-additional-info {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   padding-inline: 18px;
+}
+
+.movie-additional-info span {
+  color: var(--clr-movie-info);
 }
 
 .director-produser-info,
@@ -425,16 +430,34 @@ footer {
   text-indent: 18px;
 }
 
+.characters > span {
+  padding-left: 18px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--clr-secondary);
+}
+
+
 .characters-container {
   display: grid;
-  grid-template-columns: repeat(auto, 100px);
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  justify-items: center;
 }
 
 .character-link {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.character-info {
+  font-size: 12px;
 }
 
 .character-link img {
-  width: 10%;
+  height: 250px;
+  border-radius: 0;
 }

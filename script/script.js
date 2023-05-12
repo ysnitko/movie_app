@@ -10,6 +10,7 @@ async function loadMovie(id) {
     `https://desfarik.github.io/star-wars/api/film/${id}.json`
   );
   const data = await response.json();
+  console.log(data);
   return data;
 }
 
@@ -51,15 +52,15 @@ async function renderMovie(id) {
       <span>Star Wars: ${movie.title}. Episode ${movie.episode_id}</span>
       <a class="add-favorites"><img src="./img/bookmark-add.svg" alt=""><span>Add to favorites</span></a>
   </div>
-  <img class="img-about" src="${movieCover.src_}" alt="">
+  <img class="img-about" src="${movieCover.src_about}" alt="">
   <div class="movie-additional-info">
       <div class="realese-reating-info">
-          <span>Release date: ${movie.release_date}</span>
-          <span>Rating IMDb: ${movieCover.rating}</span>
+          <p>Release date: <span>${movie.release_date}</span></p>
+          <p>Rating IMDb: <span>${movieCover.rating}</span></p>
       </div>
       <div class="director-produser-info">
-          <span>Directod by: ${movie.director}</span>
-          <span>Produced by: ${movie.producer}</span>
+          <p>Directod by: <span>${movie.director}</span></p>
+          <p>Produced by: <span>${movie.producer}</span></p>
       </div>
   </div>
   <div class="movie-story">
@@ -81,7 +82,7 @@ async function loadCharacter(id) {
     `https://desfarik.github.io/star-wars/api/people/${id}.json`
   );
   const data = await response.json();
-  // console.log(data);
+  console.log(data);
   return data;
 }
 async function loadMovieCharacters(id) {
@@ -96,19 +97,19 @@ async function loadMovieCharacters(id) {
       return character.films.includes(`${movie.id}`);
     })
     .map((character) => {
-      const characteritem = document.createElement('a');
-      characteritem.classList.add('character-link');
+      const characterItem = document.createElement('a');
+      characterItem.classList.add('character-link');
       const html = `  
       <div>
       <img src="${character.image}" class="movie-cover" alt="movie"> 
       </div>
       <div class="character-info">
-        <div class="character-title"><span>${character.name}</span></div>
-        <div class="character-crawl"><span>${character.gender}</span></div>
-        <div class="character-created"><span>Release date: ${character.species}</span></div>
+        <div class="character-title"><span>name: ${character.name}</span></div>
+        <div class="character-created"><span>species: ${character.species}</span></div>
+        <div class="character-created"><span>homeworld: ${character.homeworld}</span></div>
       </div>`;
-      characteritem.innerHTML = html;
-      return characteritem;
+      characterItem.innerHTML = html;
+      return characterItem;
     })
     .forEach((character) => charactersContainer.appendChild(character));
 }
@@ -215,14 +216,13 @@ function OnChangeLayout(event) {
 
 toggleLayout.addEventListener('click', OnChangeLayout);
 
-// search
 async function searchItems(event) {
   event.preventDefault();
   const searchInput = document.querySelector('#search-input');
   const phrase = searchInput.value.toLowerCase().trim();
   const movieItems = document.querySelector('.movie-items');
   movieItems.innerHTML = '';
-  const movieList = await loadMovie();
+  const movieList = await loadMovie(id);
   movieList
     .filter((movie) => {
       return movie.title.toLowerCase().includes(phrase);
@@ -239,8 +239,7 @@ async function searchItems(event) {
       <div class="img-container">
       <img src="${movieCover.src}" class="movie-cover" alt="movie"> 
       <span class="movie-rating">${movieCover.rating}</span> 
-      <button class="add-favorites"></button>
-      </div>  
+      </div>
       <div class="movie-info">
         <div class="movie-title"><span>${movie.title}</span></div>
         <div class="movie-crawl"><span>${movie.opening_crawl}</span></div>
