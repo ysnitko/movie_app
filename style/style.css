@@ -3,10 +3,13 @@
 :root {
   --clr-primary: #ccc;
   --clr-secondary: #24272C;
+  --clr-header-footer: #24272C;
   --clr-number-episode: #ff0000;
   --clr-rating-background: #25af60;
+  --clr-main-container: #ffffff;
   --clr-rating-text: #ffffff;
   --clr-movie-info: #5abcf5;
+  --clr-links: #ccc;
   --clr-border-bookmarks: #5abcf5;
   --ff-primary: 'Roboto', sans-serif;
 }
@@ -15,6 +18,14 @@ body {
   background: linear-gradient(180deg, rgba(25,104,117,1) 0%, rgba(255,0,228,1) 100%);
   background-attachment: fixed;
   font-family: var(--ff-primary);
+}
+
+.dark-theme {
+  --clr-primary: #24272C;
+  --clr-secondary: #ccc;
+  --clr-number-episode: #ff0000;
+  --clr-rating-text: #ffffff;
+  --clr-main-container: #24272C;
 }
 
 
@@ -27,7 +38,7 @@ main {
   display: grid;
   min-height: 100vh;
   grid-template-columns: 180px 1fr;
-  background-color: var(--clr-rating-text);
+  background-color: var(--clr-main-container);
 }
 
 h3 {
@@ -43,7 +54,7 @@ h3 {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: var(--clr-secondary); 
+  background-color: var(--clr-header-footer); 
 }
 
 .header-container {
@@ -108,7 +119,6 @@ h3 {
   width: 20px;
   height: 20px;
   border: none;
-  
 }
 
 .toggle-tile {
@@ -126,10 +136,12 @@ h3 {
   background: none;
   font-size: 12px;
   font-weight: 500;
+  color: var(--clr-secondary);
 }
 
 .action-sorting {
   display: flex;
+  color: var(--clr-secondary);
 }
 
 .action-sorting span{
@@ -139,16 +151,9 @@ h3 {
 
 .sort-options {
   margin-left: 10px;
+
 }
  
-.sorting-up, .sorting-down {
-  border: none;
-  background: none;
-  padding: 0;
-}
-
-/* h2 */
-
 /* toggle theme */
 /* The switch - the box around the slider */
 .switch {
@@ -311,7 +316,7 @@ input:checked + .slider {
 
 input:checked + .slider::before {
   background: url(../img/moon.svg) no-repeat center;
-  background-color: var(--clr-secondary);
+  background-color: var(--clr-primary);
 }
     
 input:checked + .slider:before {
@@ -339,7 +344,7 @@ footer {
   padding: 40px 0 10px 0;
   gap: 30px;
   background: url(../img/charliechaplin-colourver.svg) no-repeat left top;
-  background-color: var(--clr-secondary);
+  background-color: var(--clr-header-footer);
 }
 
 .social-links {
@@ -354,16 +359,17 @@ footer {
   display: flex;
   gap: 40px;
 }
+
 .conditions-links a {
   font-size: 12px;
   font-weight: 600;
   text-decoration: none;
-  color: var(--clr-primary);
+  color: var(--clr-links);
 }
 
 .copyrigth {
   font-size: 12px;
-  color: var(--clr-primary);
+  color: var(--clr-links);
 }
 
 /* movie-about */
@@ -424,10 +430,12 @@ footer {
 
 .movie-story h3 {
   padding-left: 18px;
+  color: var(--clr-secondary);
 }
 
 .movie-story p {
   text-indent: 18px;
+  color: var(--clr-secondary);
 }
 
 .characters > span {
@@ -440,17 +448,19 @@ footer {
 
 .characters-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 10px;
-  justify-items: center;
 }
 
 .character-link {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding: 10px;
   cursor: pointer;
+  text-decoration: none;
+  color: var(--clr-secondary);
 }
 
 .character-info {
@@ -458,6 +468,7 @@ footer {
 }
 
 .character-link img {
-  height: 250px;
-  border-radius: 0;
+  width: 100px;
+  height: 118px;
+  border-radius: 15%;
 }
