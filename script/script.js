@@ -1,5 +1,7 @@
 const select = document.querySelector('#sorting');
 const toggleLayout = document.querySelector('.action-toggle-layout');
+isChecked = restore().isChecked || false;
+select.selectedIndex = restore().select || 0;
 
 function OnSortingItems() {
   const movieItems = document.querySelector('.movie-items');
@@ -17,6 +19,7 @@ function OnSortingItems() {
       return movieEpisodeA - movieEpisodeB;
     });
   }
+
   if (select.selectedIndex === 1) {
     movieList.sort((a, b) => {
       const movieEpisodeA = a
@@ -30,6 +33,7 @@ function OnSortingItems() {
       return movieEpisodeB - movieEpisodeA;
     });
   }
+
   if (select.selectedIndex === 2) {
     movieList.sort((a, b) => {
       const movieTitleA = a.querySelector('.movie-title span').textContent;
@@ -39,6 +43,7 @@ function OnSortingItems() {
       }
     });
   }
+
   if (select.selectedIndex === 3) {
     movieList.sort((a, b) => {
       const movieTitleA = a.querySelector('.movie-title span').textContent;
@@ -48,6 +53,7 @@ function OnSortingItems() {
       }
     });
   }
+
   if (select.selectedIndex === 4) {
     movieList.sort((a, b) => {
       const releaseDateA = new Date(
@@ -59,6 +65,7 @@ function OnSortingItems() {
       return releaseDateA - releaseDateB;
     });
   }
+
   if (select.selectedIndex === 5) {
     movieList.sort((a, b) => {
       const releaseDateA = new Date(
@@ -70,6 +77,7 @@ function OnSortingItems() {
       return releaseDateB - releaseDateA;
     });
   }
+  store();
   movieItems.innerHTML = '';
   movieList.forEach((movie) => {
     movieItems.appendChild(movie);
@@ -136,24 +144,29 @@ async function searchItems(event) {
     });
 }
 
-function storeUser() {
+function toggleTheme() {
+  const toggleTheme = document.querySelector('#checkbox');
+  isChecked = toggleTheme.checked;
+  if (isChecked) {
+    document.body.classList.add('dark-theme');
+    store('dark-theme', isChecked);
+  } else {
+    document.body.classList.remove('dark-theme');
+    store('light-theme', isChecked);
+  }
+  store(isChecked);
+}
+
+function store(isChecked) {
   localStorage.setItem(
     'dataStorage',
     JSON.stringify({
       select: select.selectedIndex,
+      isChecked: isChecked,
     })
   );
 }
 
-function restoreUsers() {
+function restore() {
   return JSON.parse(localStorage.getItem('dataStorage'));
-}
-
-function toggleTheme() {
-  const toggleTheme = document.querySelector('#checkbox');
-  if (toggleTheme.checked) {
-    document.body.classList.add(`dark-theme`);
-  } else {
-    document.body.classList.remove(`dark-theme`);
-  }
 }

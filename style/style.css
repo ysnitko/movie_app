@@ -435,6 +435,7 @@ footer {
 
 .movie-story p {
   text-indent: 18px;
+  text-align: justify;
   color: var(--clr-secondary);
 }
 

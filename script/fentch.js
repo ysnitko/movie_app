@@ -113,6 +113,7 @@ async function loadMovieCharacters(id) {
       return characterLink;
     })
     .forEach((character) => charactersContainer.appendChild(character));
+  console.log(charactersList);
 }
 
 async function loadCharacterInfo(id) {
