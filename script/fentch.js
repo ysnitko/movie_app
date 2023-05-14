@@ -105,9 +105,7 @@ async function loadMovieCharacters(id) {
       <img src="${character.image}" class="movie-cover" alt="movie"> 
       </div>
       <div class="character-info">
-        <div class="character-title"><span>name: ${character.name}</span></div>
-        <div class="character-created"><span>species: ${character.species}</span></div>
-        <div class="character-created"><span>homeworld: ${character.homeworld}</span></div>
+        <div class="character-title"><span>${character.name}</span></div>
       </div>`;
       characterLink.innerHTML = html;
       return characterLink;
@@ -121,25 +119,27 @@ async function loadCharacterInfo(id) {
     `https://desfarik.github.io/star-wars/api/people/${id}.json`
   );
   const data = await response.json();
-  // console.log(data);
+  console.log(data);
   return data;
 }
 
 async function renderCharacterAbout(id) {
   const characterInfo = await loadCharacterInfo(id);
   const movieContainer = document.querySelector('.movies-container');
-  const html = `<div class="movie-about"> 
-    <div>            
-      <span>Star Wars: ${characterInfo.name}. Episode ${characterInfo.eye_color}</span> 
-      <img class="img-about" src="${characterInfo.image}" alt=""> 
-    </div> 
-    <div class="character-info">
-      <div class="character-birth"><span>Birth year: ${characterInfo.birth_year}</span></div> 
-      <div class="character-gender"><span>Gender: ${characterInfo.gender}</span></div> 
-      <div class="character-height"><span>Height: ${characterInfo.height}</span></div> 
-      <div class="character-created"><span>Homeworld: ${characterInfo.homeworld}</span></div> 
-    </div>
-  </div>`;
+  const html = `<div class="character-about"> 
+  <img class="character-image" src="${characterInfo.image}" alt="">
+  <div class="character-description">
+      <p class="character-name">Name: <span>${characterInfo.name}</span></p>
+      <p class="character-birth">Birth year: <span>${characterInfo.birth_year}</span></p>
+      <p class="character-gender">Gender: <span>${characterInfo.gender}</span></p>
+      <p class="character-species">Species: <span>${characterInfo.species}</span></p>
+      <p class="character-skin_color">Skin color: <span>${characterInfo.skin_color}</span></p>
+      <p class="character-height">Height: <span>${characterInfo.height}</span></p>
+      <p class="character-mass">Mass: <span>${characterInfo.mass}</span></p>
+      <p class="character-films">Films: <span>${characterInfo.films}</span></p>
+      <p class="character-wiki">Wiki: <a href="" >${characterInfo.wiki}</a></p>
+  </div>
+</div>`;
   movieContainer.innerHTML = html;
 }
 
