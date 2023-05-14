@@ -37,26 +37,6 @@ function OnSortingItems() {
 
   if (select.selectedIndex === 2) {
     movieList.sort((a, b) => {
-      const movieTitleA = a.querySelector('.movie-title span').textContent;
-      const movieTitleB = b.querySelector('.movie-title span').textContent;
-      if (movieTitleB > movieTitleA) {
-        return -1;
-      }
-    });
-  }
-
-  if (select.selectedIndex === 3) {
-    movieList.sort((a, b) => {
-      const movieTitleA = a.querySelector('.movie-title span').textContent;
-      const movieTitleB = b.querySelector('.movie-title span').textContent;
-      if (movieTitleA > movieTitleB) {
-        return -1;
-      }
-    });
-  }
-
-  if (select.selectedIndex === 4) {
-    movieList.sort((a, b) => {
       const releaseDateA = new Date(
         a.querySelector('.movie-created span').textContent.split(' ').slice(-1)
       );
@@ -67,7 +47,7 @@ function OnSortingItems() {
     });
   }
 
-  if (select.selectedIndex === 5) {
+  if (select.selectedIndex === 3) {
     movieList.sort((a, b) => {
       const releaseDateA = new Date(
         a.querySelector('.movie-created span').textContent.split(' ').slice(-1)
@@ -153,7 +133,6 @@ function toggleTheme() {
     document.body.classList.remove('dark-theme');
     store(toggleThemes.checked);
   }
-  store(toggleThemes.checked);
 }
 
 function store(toggleThemesChecked) {
