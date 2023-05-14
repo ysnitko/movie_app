@@ -39,6 +39,7 @@ async function loadAllMovies(id) {
     })
     .forEach((movie) => movieItems.appendChild(movie));
   OnSortingItems();
+  toggleTheme();
 }
 
 async function renderMovieAbout(id) {
@@ -69,9 +70,11 @@ async function renderMovieAbout(id) {
     <span>Characters:</span>
     <div class="characters-container"></div>
   </div>
+  </div>
 `;
   movieContainer.innerHTML = html;
   loadMovieCharacters(id);
+  toggleTheme();
 }
 
 renderMovieAbout(id);
@@ -141,6 +144,7 @@ async function renderCharacterAbout(id) {
   </div>
 </div>`;
   movieContainer.innerHTML = html;
+  toggleTheme();
 }
 
 renderCharacterAbout(characterID);

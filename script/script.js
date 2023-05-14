@@ -1,6 +1,7 @@
 const select = document.querySelector('#sorting');
 const toggleLayout = document.querySelector('.action-toggle-layout');
-isChecked = restore().isChecked || false;
+const toggleThemes = document.querySelector('#checkbox');
+toggleThemes.checked = restore().toggleThemesChecked || false;
 select.selectedIndex = restore().select || 0;
 
 function OnSortingItems() {
@@ -145,24 +146,22 @@ async function searchItems(event) {
 }
 
 function toggleTheme() {
-  const toggleTheme = document.querySelector('#checkbox');
-  isChecked = toggleTheme.checked;
-  if (isChecked) {
+  if (toggleThemes.checked === true) {
     document.body.classList.add('dark-theme');
-    store('dark-theme', isChecked);
+    store(toggleThemes.checked);
   } else {
     document.body.classList.remove('dark-theme');
-    store('light-theme', isChecked);
+    store(toggleThemes.checked);
   }
-  store(isChecked);
+  store(toggleThemes.checked);
 }
 
-function store(isChecked) {
+function store(toggleThemesChecked) {
   localStorage.setItem(
     'dataStorage',
     JSON.stringify({
       select: select.selectedIndex,
-      isChecked: isChecked,
+      toggleThemesChecked: toggleThemesChecked,
     })
   );
 }

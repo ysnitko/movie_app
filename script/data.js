@@ -42,10 +42,3 @@ const MOVIE_COVER = [
     src_about: './img/the_force_about.jpg',
   },
 ];
-// function storeUser() {
-//   localStorage.setItem('userList', JSON.stringify(userList));
-// }
-
-// function restoreUsers() {
-//   return JSON.parse(localStorage.getItem('userList'));
-// }
