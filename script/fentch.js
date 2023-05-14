@@ -139,8 +139,8 @@ async function renderCharacterAbout(id) {
       <p class="character-skin_color">Skin color: <span>${characterInfo.skin_color}</span></p>
       <p class="character-height">Height: <span>${characterInfo.height}</span></p>
       <p class="character-mass">Mass: <span>${characterInfo.mass}</span></p>
-      <p class="character-films">Films: <span>${characterInfo.films}</span></p>
-      <p class="character-wiki">Wiki: <a href="" >${characterInfo.wiki}</a></p>
+      <p class="character-films">Films: <a href="">${characterInfo.films}</a></p>
+      <p class="character-wiki">Wiki: <a href="${characterInfo.wiki}" target="_blank" >${characterInfo.wiki}</a></p>
   </div>
 </div>`;
   movieContainer.innerHTML = html;
