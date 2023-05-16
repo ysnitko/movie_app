@@ -125,8 +125,7 @@ async function loadMovieCharacters(id) {
       return characterLink;
     })
     .forEach((character) => charactersContainer.appendChild(character));
-    spinner.classList.remove('show');
-    
+  spinner.classList.remove('show');
 }
 
 async function loadCharacterInfo(id) {
@@ -159,21 +158,23 @@ async function renderCharacterAbout(id) {
                 </div>
                 </div>`;
   movieContainer.innerHTML = html;
-  charactersFilms(id)
+  charactersFilms(id);
   toggleTheme();
 }
 
 renderCharacterAbout(characterID);
 
 async function charactersFilms(id) {
-  const characterFilms = document.querySelector('.character-films-featuring')
+  const characterFilms = document.querySelector('.character-films-featuring');
   const characterInfo = await loadCharacterInfo(id);
-  let links = characterInfo.films
+  let links = characterInfo.films;
   let movie = await loadMovie('all');
-  movie.filter((link) => links.includes(link.id.toString())).map((link) => {
-    const links = document.createElement('a');
-    links.setAttribute('href', `index.html?id=${link.id}`)
-    links.textContent = `${link.title} \n`
-    characterFilms.append(links)}
-)
+  movie
+    .filter((link) => links.includes(link.id.toString()))
+    .map((link) => {
+      const links = document.createElement('a');
+      links.setAttribute('href', `index.html?id=${link.id}`);
+      links.textContent = `${link.title} \n`;
+      characterFilms.append(links);
+    });
 }

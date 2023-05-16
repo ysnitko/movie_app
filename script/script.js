@@ -6,7 +6,6 @@ changeLayout.checked = restore().layoutChecked || false;
 toggleThemes.checked = restore().themesChecked || false;
 select.selectedIndex = restore().select || 0;
 
-
 function OnSortingItems() {
   const movieItems = document.querySelector('.movie-items');
   const movieList = Array.from(document.querySelectorAll('.movie-item'));
@@ -69,28 +68,27 @@ function OnSortingItems() {
 }
 
 function OnChangeLayout() {
-const movieItem = document.querySelectorAll('.movie-item');
-const movieCrawl = document.querySelectorAll('.movie-crawl');
-const movieItems = document.querySelector('.movie-items');
+  const movieItem = document.querySelectorAll('.movie-item');
+  const movieCrawl = document.querySelectorAll('.movie-crawl');
+  const movieItems = document.querySelector('.movie-items');
   if (changeLayout.checked) {
     movieItems.classList.add('active-layout');
     movieItem.forEach((item) => {
       item.classList.add('active-item');
-  })
-      movieCrawl.forEach((item) => {
+    });
+    movieCrawl.forEach((item) => {
       item.style.display = 'block';
     });
-    store(changeLayout.checked)
-}
-   else  {
+    store(changeLayout.checked);
+  } else {
     movieItems.classList.remove('active-layout');
     movieItem.forEach((item) => {
-      item.classList.remove('active-item');  
+      item.classList.remove('active-item');
     });
     movieCrawl.forEach((item) => {
       item.style.display = '-webkit-box';
     });
-    store(changeLayout.checked)
+    store(changeLayout.checked);
   }
 }
 
@@ -143,31 +141,26 @@ function timeToNewEpisode() {
   let timeToRealese = (releaseDate - currentDate) / 1000;
   let days = Math.floor(timeToRealese / 86400);
   let hours = Math.floor((timeToRealese % 86400) / 3600);
-  let minutes  = Math.floor((timeToRealese % 3600) / 60);
+  let minutes = Math.floor((timeToRealese % 3600) / 60);
   let seconds = Math.floor(timeToRealese % 60);
   const releaseTimeContainer = document.querySelector('.release-time');
-  releaseTimeContainer.innerHTML = `to release of the next episode remain: <span>${days}</span> days <span>${hours}</span> hours <span>${minutes}</span> minutes <span class="seconds-left">${seconds}</span> seconds`;
-  const flashingDot =  document.querySelector('.flashing-dot');
+  releaseTimeContainer.innerHTML = `To release of the next episode remain: <span>${days}</span> days <span>${hours}</span> hours <span>${minutes}</span> minutes <span class="seconds-left">${seconds}</span> seconds`;
+  const flashingDot = document.querySelector('.flashing-dot');
 
   if (flashingDot.style.visibility === 'hidden') {
-    flashingDot.style.visibility = 'visible'
-  }
-  else {  flashingDot.style.visibility = 'hidden'}
-  
-  
-  
-  
-  if  (timeToRealese <= 0) {
-    clearInterval(timer)
-    releaseTimeContainer.textContent = `before the next episode remain`
+    flashingDot.style.visibility = 'visible';
+  } else {
+    flashingDot.style.visibility = 'hidden';
   }
 
-
-
+  if (timeToRealese <= 0) {
+    clearInterval(timer);
+    releaseTimeContainer.textContent = `before the next episode remain`;
+  }
 }
 
-let timer = setInterval(timeToNewEpisode, 1000)
-timeToNewEpisode() 
+let timer = setInterval(timeToNewEpisode, 1000);
+timeToNewEpisode();
 
 function store() {
   localStorage.setItem(
