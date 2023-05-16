@@ -99,9 +99,13 @@ async function searchItems(event) {
   const phrase = searchInput.value.toLowerCase();
   movieItems.innerHTML = '';
   const movieList = await loadMovie(id);
+  console.log(movieList);
   movieList
     .filter((movie) => {
-      return movie.title.toLowerCase().includes(phrase);
+      return (
+        movie.title.toLowerCase().includes(phrase) ||
+        movie.opening_crawl.toLowerCase().includes(phrase)
+      );
     })
     .forEach((movie) => {
       const linkMovie = document.createElement('a');
