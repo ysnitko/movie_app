@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie app</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    
     <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
@@ -35,15 +40,21 @@
         <div class="menu-section">
             <ul class="main-navigation">
                 <li><a href="./index.html">Main</a></li>
-                <li><a href="">Categories</a></li>
-                <li><a href="">Newest 2023</a></li>
-                <li><a href="">Download</a></li>
-                <li><a href="">Last reviews</a></li>
-                <li><a href="">NEW!!! Serials</a></li>
+                <li><a href="">Categories #</a></li>
+                <li><a href="">Newest 2023 #</a></li>
+                <li><a href="">Download #</a></li>
+                <li><a href="">Last reviews #</a></li>
+                <li><a href="">NEW!!! Serials #</a></li>
             </ul>
         </div>
         <div class="movies-container">
-            <h3>Star Wars movies</h3>
+            <div class="movies-container-header"> 
+                <h3>Star Wars movies</h3>
+                <div class="release-block">
+                    <img class="flashing-dot" src="./img/moon.svg" alt="">
+                <p class="release-time"></p>
+                </div>
+            </div>
             <div class="action-on-movies">
                 <div class="action-sorting">
                     <span>Sort by:</span>
@@ -55,8 +66,14 @@
                     </select>
                 </div>
                 <div class="action-toggle-layout">
-                    <button class="toggle-rows"></button>
-                    <button class="toggle-tile"></button>
+                    <label  class="layout row">
+                        <input type="radio" class="layouts" name="changeLayout" onchange="OnChangeLayout()">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label  class="layout tile">
+                        <input type="radio"  class="layouts " name="changeLayout" onchange="OnChangeLayout()" checked>
+                        <span class="checkmark"></span>
+                    </label>
                 </div>
             </div>
             <div class="movie-items"></div>
@@ -64,10 +81,10 @@
     </main>    
     <footer>
         <ul class="social-links">
-            <li><a href=""><img src="./img/facebook.svg" alt=""></a></li>
-            <li><a href=""><img src="./img/instagram.svg" alt=""></a></li>
-            <li><a href=""><img src="./img/twitter.svg" alt=""></a></li>
-            <li><a href=""><img src="./img/youtube.svg" alt=""></a></li>
+            <li><a href="https://ru-ru.facebook.com/" target="_blank"><img src="./img/facebook.svg" alt="facebook"></a></li>
+            <li><a href="https://www.instagram.com/" target="_blank"><img src="./img/instagram.svg"  alt="instagram"></a></li>
+            <li><a href="https://twitter.com" target="_blank"><img src="./img/twitter.svg"  alt="twitter"></a></li>
+            <li><a href="https://www.youtube.com/" target="_blank"><img src="./img/youtube.svg" alt="youtube"></a></li>
         </ul>
         <div class="conditions-links">
             <a href="">Conditions of Use</a>
@@ -82,3 +99,4 @@
 </div>
 </body>
 </html>
+

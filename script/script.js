@@ -1,8 +1,11 @@
 const select = document.querySelector('#sorting');
-const toggleLayout = document.querySelector('.action-toggle-layout');
 const toggleThemes = document.querySelector('#checkbox');
-toggleThemes.checked = restore().toggleThemesChecked || false;
+const changeLayout = document.querySelector('.layouts');
+
+changeLayout.checked = restore().layoutChecked || false;
+toggleThemes.checked = restore().themesChecked || false;
 select.selectedIndex = restore().select || 0;
+
 
 function OnSortingItems() {
   const movieItems = document.querySelector('.movie-items');
@@ -65,32 +68,31 @@ function OnSortingItems() {
   });
 }
 
-// change layout
-function OnChangeLayout(event) {
-  let target = event.target;
-  const movieItems = document.querySelector('.movie-items');
-  const movieItem = document.querySelectorAll('.movie-item');
-  const movieCrawl = document.querySelectorAll('.movie-crawl');
-  if (target.classList.contains('toggle-tile')) {
+function OnChangeLayout() {
+const movieItem = document.querySelectorAll('.movie-item');
+const movieCrawl = document.querySelectorAll('.movie-crawl');
+const movieItems = document.querySelector('.movie-items');
+  if (changeLayout.checked) {
     movieItems.classList.add('active-layout');
     movieItem.forEach((item) => {
       item.classList.add('active-item');
-    });
-    movieCrawl.forEach((item) => {
+  })
+      movieCrawl.forEach((item) => {
       item.style.display = 'block';
     });
-  } else if (target.classList.contains('toggle-rows')) {
+    store(changeLayout.checked)
+}
+   else  {
     movieItems.classList.remove('active-layout');
     movieItem.forEach((item) => {
-      item.classList.remove('active-item');
+      item.classList.remove('active-item');  
     });
     movieCrawl.forEach((item) => {
       item.style.display = '-webkit-box';
     });
+    store(changeLayout.checked)
   }
 }
-
-toggleLayout.addEventListener('click', OnChangeLayout);
 
 async function searchItems(event) {
   event.preventDefault();
@@ -126,7 +128,7 @@ async function searchItems(event) {
 }
 
 function toggleTheme() {
-  if (toggleThemes.checked === true) {
+  if (toggleThemes.checked) {
     document.body.classList.add('dark-theme');
     store(toggleThemes.checked);
   } else {
@@ -135,12 +137,45 @@ function toggleTheme() {
   }
 }
 
-function store(toggleThemesChecked) {
+function timeToNewEpisode() {
+  let releaseDate = new Date(2024, 4, 16, 0, 0);
+  let currentDate = new Date();
+  let timeToRealese = (releaseDate - currentDate) / 1000;
+  let days = Math.floor(timeToRealese / 86400);
+  let hours = Math.floor((timeToRealese % 86400) / 3600);
+  let minutes  = Math.floor((timeToRealese % 3600) / 60);
+  let seconds = Math.floor(timeToRealese % 60);
+  const releaseTimeContainer = document.querySelector('.release-time');
+  releaseTimeContainer.innerHTML = `to release of the next episode remain: <span>${days}</span> days <span>${hours}</span> hours <span>${minutes}</span> minutes <span class="seconds-left">${seconds}</span> seconds`;
+  const flashingDot =  document.querySelector('.flashing-dot');
+
+  if (flashingDot.style.visibility === 'hidden') {
+    flashingDot.style.visibility = 'visible'
+  }
+  else {  flashingDot.style.visibility = 'hidden'}
+  
+  
+  
+  
+  if  (timeToRealese <= 0) {
+    clearInterval(timer)
+    releaseTimeContainer.textContent = `before the next episode remain`
+  }
+
+
+
+}
+
+let timer = setInterval(timeToNewEpisode, 1000)
+timeToNewEpisode() 
+
+function store() {
   localStorage.setItem(
     'dataStorage',
     JSON.stringify({
       select: select.selectedIndex,
-      toggleThemesChecked: toggleThemesChecked,
+      themesChecked: toggleThemes.checked,
+      layoutChecked: changeLayout.checked,
     })
   );
 }
