@@ -16,8 +16,6 @@
   --clr-timer: #ff7e7e;
   --clr-border-bookmarks: #5abcf5;
   --ff-primary:'Noto Sans', sans-serif;
-
-
 }
 
 body {
@@ -205,6 +203,7 @@ h3 {
   
   /* movie container */
 .movies-container {
+  position: relative;
   padding: 15px;
 }
 
@@ -488,7 +487,7 @@ footer {
 
 .characters-container {
   display: grid;
-  min-height: 50vh;
+  /* min-height: 50vh; */
   position: relative;
   grid-template-columns: repeat(auto-fill, 140px);
   margin-top: 20px;

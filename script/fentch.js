@@ -70,17 +70,18 @@ async function renderMovieAbout(id) {
   <div class="characters">
     <span>Characters:</span>
     <div class="characters-container">
-    
     <div class="lds-ring spinner">
         <div></div>
         <div></div>
         <div></div>
         <div></div>
     </div>
-    <button id="loadMoreCharacters" onclick="loadMovieCharacters()">load more</button>
+    
     </div>
   </div>
+  
   </div>
+  <button id="loadMoreCharacters" onclick="loadMovieCharacters()">load more</button>
 `;
   movieContainer.innerHTML = html;
   loadMovieCharacters();
