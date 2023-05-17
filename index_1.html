@@ -4,85 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie app</title>
-    <link rel="stylesheet" href="./style/style.css">
+    <title>Document</title>
 </head>
 <body>
-    <div class="container">
-    <header> 
-        <div class="header-container">
-            <div class="header-content">
-                <a href="index.html" class="header-logo">
-                    <img src="./img/logo.png" alt="">
-                </a>
-                <form action="" class="search-form" onsubmit="searchItems(event)">
-                    <input type="search" id="search-input" placeholder="Search">
-                </form>
-                <div class="header-elements">
-                    <div class="color-scheme-toggle">
-                        <label class="switch">
-                            <input type="checkbox" id="checkbox" onchange="toggleTheme()">
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
-                    <button type="button" class="authorization"></button>
-                </div>
-            </div> 
-         </div> 
-       
-     </header>
-    <main class="main-container">
-        <div class="menu-section">
-            <ul class="main-navigation">
-                <li><a href="">Main</a></li>
-                <li><a href="">Categories</a></li>
-                <li><a href="">Newest 2023</a></li>
-                <li><a href="">Download</a></li>
-                <li><a href="">Last reviews</a></li>
-                <li><a href="">NEW!!! Serials</a></li>
-            </ul>
-        </div>
-        <div class="movies-container">
-            <div class="character-about"> 
-                <img src="./img/a_new_hope.jpg" alt="">
-                <div class="character-description">
-                    <p class="character-name">scsc</p>
-                    <p class="character-birth">cdsc</p>
-                    <p class="character-birth">cds</p>
-                    <p class="character-born-location">cdsc</p>
-                    <p class="character-gender">male</p>
-                    <p class="character-species">species</p>
-                    <p class="character-species">species</p>
-                    <p class="character-skin_color">green</p>
-                    <p class="character-heigth">gre123en</p>
-                    <p class="character-mass">134</p>
-                    <p class="character-died-location">green</p>
-                    <p class="character-films">green</p>
-                    <a class="character-wiki">green</a>
-                </div>
+    html
+<div id="items"></div>
+<button id="btn" onclick="loadMore()">Вывести еще</button>
+
+<script>
+let items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80];
+const itemsContainer = document.getElementById('items');
+const itemsPerPage = 7;
+let currentPage = 1;
+
+function loadMore() {
+  let startIndex = (currentPage - 1) * itemsPerPage;
+  let endIndex = currentPage * itemsPerPage;
+  let pageItems = items.slice(startIndex, endIndex);
+  for (let i = 0; i < pageItems.length; i++) {
+    let item = document.createElement('div');
+    item.textContent = pageItems[i];
+    itemsContainer.appendChild(item);
+  }
+  currentPage++;
+  if (currentPage > Math.ceil(items.length / itemsPerPage)) {
+    document.getElementById("btn").disabled = true;
+  }
+}
+</script>
 
 
-            </div>
-
-        </div>
-    </main>    
-    <footer>
-        <ul class="social-links">
-            <li><a href=""><img src="./img/facebook.svg" alt=""></a></li>
-            <li><a href=""><img src="./img/instagram.svg" alt=""></a></li>
-            <li><a href=""><img src="./img/twitter.svg" alt=""></a></li>
-            <li><a href=""><img src="./img/youtube.svg" alt=""></a></li>
-        </ul>
-        <div class="conditions-links">
-            <a href="">Conditions of Use</a>
-            <a href="">Privacy &AMP; Policy</a>
-            <a href="">Press Room</a>
-        </div>
-        <p class="copyrigth">&COPY; 2023 by Yuri Snitko</p>
-    </footer>
-    <script src="./script/fentch.js"></script>
-    <script src="./script/data.js"></script>
-    <!-- <script src="./script/script.js"></script> -->
-</div>
 </body>
 </html>

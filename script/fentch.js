@@ -77,13 +77,13 @@ async function renderMovieAbout(id) {
         <div></div>
         <div></div>
     </div>
-    <button id="loadMoreCharacters" onclick="loadMore()">load more</button>
+    <button id="loadMoreCharacters" onclick="loadMovieCharacters()">load more</button>
     </div>
   </div>
   </div>
 `;
   movieContainer.innerHTML = html;
-  loadMovieCharacters(id);
+  loadMovieCharacters();
   toggleTheme();
 }
 
@@ -97,14 +97,17 @@ async function loadCharacter(id) {
   return data;
 }
 
-async function loadMovieCharacters(id) {
+const itemsPerPage = 7;
+let currentPage = 1;
+async function loadMovieCharacters() {
+  let startIndex = (currentPage - 1) * itemsPerPage;
+  let endIndex = currentPage * itemsPerPage;
   const charactersContainer = document.querySelector('.characters-container');
   const promises = Array.from({ length: 87 }, (_, i) => loadCharacter(i + 1));
   const spinner = document.querySelector('.spinner');
   spinner.classList.add('show');
   let charactersList = await Promise.all(promises);
   let movie = await loadMovie(id);
-
   charactersList
     .filter((character) => {
       return character.films.includes(`${movie.id}`);
@@ -124,8 +127,10 @@ async function loadMovieCharacters(id) {
       characterLink.innerHTML = html;
       return characterLink;
     })
+    .slice(startIndex, endIndex)
     .forEach((character) => charactersContainer.appendChild(character));
   spinner.classList.remove('show');
+  currentPage++;
 }
 
 async function loadCharacterInfo(id) {
