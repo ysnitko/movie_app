@@ -98,18 +98,18 @@ async function loadCharacter(id) {
   return data;
 }
 
-const itemsPerPage = 7;
+const itemsOnPage = 7;
 let currentPage = 1;
 async function loadMovieCharacters() {
-  let startIndex = (currentPage - 1) * itemsPerPage;
-  let endIndex = currentPage * itemsPerPage;
+  let startIndex = (currentPage - 1) * itemsOnPage;
+  let endIndex = currentPage * itemsOnPage;
   const charactersContainer = document.querySelector('.characters-container');
   const promises = Array.from({ length: 87 }, (_, i) => loadCharacter(i + 1));
   const spinner = document.querySelector('.spinner');
   spinner.classList.add('show');
   let charactersList = await Promise.all(promises);
   let movie = await loadMovie(id);
-  charactersList
+  let final = charactersList
     .filter((character) => {
       return character.films.includes(`${movie.id}`);
     })
@@ -128,10 +128,15 @@ async function loadMovieCharacters() {
       characterLink.innerHTML = html;
       return characterLink;
     })
-    .slice(startIndex, endIndex)
-    .forEach((character) => charactersContainer.appendChild(character));
+    .slice(startIndex, endIndex);
+  final.forEach((character) => charactersContainer.appendChild(character));
   spinner.classList.remove('show');
+  console.log(final);
   currentPage++;
+  if (final.length === 0) {
+    const loadMoreButton = document.querySelector('#loadMoreCharacters');
+    loadMoreButton.classList.add('hidden');
+  }
 }
 
 async function loadCharacterInfo(id) {
