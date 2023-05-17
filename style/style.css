@@ -537,9 +537,8 @@ footer {
 .character-description {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   padding-left: 10px;
-  gap: 2px;
+  gap: 4px;
 }
 
 .character-name {
