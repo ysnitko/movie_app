@@ -15,7 +15,9 @@
   --clr-links: #ccc;
   --clr-timer: #ff7e7e;
   --clr-border-bookmarks: #5abcf5;
+  --clr-background-dialog: rgba(202, 199, 199, 0.4);
   --ff-primary:'Noto Sans', sans-serif;
+
 }
 
 body {
@@ -491,6 +493,7 @@ footer {
   position: relative;
   grid-template-columns: repeat(auto-fill, 140px);
   margin-top: 20px;
+  padding-bottom: 45px;
 }
 
 .character-link {
@@ -518,7 +521,13 @@ footer {
   position: absolute;
   bottom: 0%;  
   left: 50%;
+  width: 40px;
+  height: 40px;
   transform: translate(-50%, -50%);
+  background: url(../img/more.svg) no-repeat center;
+  background-color: transparent;
+  border-radius: 50%;
+  border: none;
 }
 
 /* characters about */
@@ -638,7 +647,7 @@ footer {
   position: absolute;
   width: 40px;
   height: 40px;
-  top: 50%;  
+  bottom: 0%;  
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -675,4 +684,68 @@ footer {
   100% {
       transform: rotate(360deg);
   }
+}
+
+/* dialog */
+
+.dialog_container {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--clr-background-dialog)
+}
+
+#form-authorization {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25%;
+  min-width: 250px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  gap: 20px;
+  border-top: 4px solid var(--clr-border-bookmarks);
+  background-color: var(--clr-main-container);
+}
+
+#form-authorization input {
+  width: 70%;
+  padding: 8px;
+  font-size: 12px;
+}
+
+.small_text {
+color: var(--clr-movie-info);
+}
+
+.confirm-button {
+  padding: 10px;
+  width: 70%;
+  background-color: var(--clr-border-bookmarks);
+  border: none;
+  color: var(--clr-rating-text);
+}
+
+.forgot-password {
+  width: 100%;
+  border: none;
+  padding: 10px;
+  font-size: 14px;
+  background-color: var(--clr-primary);
+  text-align: center;
+  text-decoration: none;
+  color: var(--clr-secondary);
+}
+
+.x_button {
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: transparent;
+  align-self: end;
+  border-radius: 10px;
+  color: var(--clr-border-bookmarks);
 }

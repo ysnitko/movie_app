@@ -76,15 +76,14 @@ async function renderMovieAbout(id) {
         <div></div>
         <div></div>
     </div>
-    
+    <button id="loadMoreCharacters" onclick="loadMore()"></button>
     </div>
   </div>
-  
   </div>
-  <button id="loadMoreCharacters" onclick="loadMovieCharacters()">load more</button>
 `;
   movieContainer.innerHTML = html;
-  loadMovieCharacters();
+  // loadMovieCharacters();
+  loadMore()
   toggleTheme();
 }
 
@@ -98,15 +97,71 @@ async function loadCharacter(id) {
   return data;
 }
 
-const itemsOnPage = 7;
+// const itemsOnPage = 7;
+// let currentPage = 1;
+// async function loadMovieCharacters() {
+//   const loadMoreButton = document.querySelector('#loadMoreCharacters');
+//   let startIndex = (currentPage - 1) * itemsOnPage;
+//   let endIndex = currentPage * itemsOnPage;
+//   const charactersContainer = document.querySelector('.characters-container');
+//   const promises = Array.from({ length: 87 }, (_, i) => loadCharacter(i + 1));
+//   const spinner = document.querySelector('.spinner');
+//   spinner.classList.add('show');
+//   loadMoreButton.classList.add('hidden');
+ 
+//   let charactersList = await Promise.all(promises);
+//   let movie = await loadMovie(id);
+//   let final = charactersList
+//     .filter((character) => {
+//       return character.films.includes(`${movie.id}`);
+//     })
+//     .map((character) => {
+//       const characterLink = document.createElement('a');
+//       characterLink.classList.add('character-link');
+//       characterLink.setAttribute(
+//         'href',
+//         `index.html?character=${character.id}`
+//       );
+//       const html = `  
+//       <div>
+//       <img src="${character.image}" class="character-cover" alt="movie"> 
+//       </div>
+//         <div class="character-title"><span>${character.name}</span></div>`;
+//       characterLink.innerHTML = html;
+//       return characterLink;
+//     })
+//     .slice(startIndex, endIndex);
+//     console.log(final);
+//   final.forEach((character) => charactersContainer.append(character));
+//   spinner.classList.remove('show');
+//   loadMoreButton.classList.remove('hidden');
+  
+//   currentPage++;
+//   console.log(currentPage);
+//   // for (let index = 0; index < final.length; index++) {
+//   //   const element = array[index];
+    
+//   // }
+//   if (charactersList.length === 0) {
+//     loadMoreButton.classList.add('hidden');
+//   }
+// }
 let currentPage = 1;
-async function loadMovieCharacters() {
+function loadMore() {
+  const itemsOnPage = 7;
   let startIndex = (currentPage - 1) * itemsOnPage;
   let endIndex = currentPage * itemsOnPage;
+  renderMovieCharacters(startIndex, endIndex, itemsOnPage)
+  currentPage++
+}
+
+async function renderMovieCharacters(startIndex, endIndex, itemsOnPage) {
+  const loadMoreButton = document.querySelector('#loadMoreCharacters');
   const charactersContainer = document.querySelector('.characters-container');
   const promises = Array.from({ length: 87 }, (_, i) => loadCharacter(i + 1));
   const spinner = document.querySelector('.spinner');
   spinner.classList.add('show');
+  loadMoreButton.classList.add('hidden');
   let charactersList = await Promise.all(promises);
   let movie = await loadMovie(id);
   let final = charactersList
@@ -128,14 +183,14 @@ async function loadMovieCharacters() {
       characterLink.innerHTML = html;
       return characterLink;
     })
-    .slice(startIndex, endIndex);
-  final.forEach((character) => charactersContainer.appendChild(character));
-  spinner.classList.remove('show');
+    
+  final.slice(startIndex, endIndex).forEach((character) => charactersContainer.append(character));
   console.log(final);
-  currentPage++;
-  if (final.length === 0) {
-    const loadMoreButton = document.querySelector('#loadMoreCharacters');
-    loadMoreButton.classList.add('hidden');
+  spinner.classList.remove('show');
+  loadMoreButton.classList.remove('hidden');
+ 
+  if  (currentPage > Math.ceil(final.length / itemsOnPage)) { 
+    loadMoreButton.classList.add('hidden') 
   }
 }
 
@@ -169,13 +224,13 @@ async function renderCharacterAbout(id) {
                 </div>
                 </div>`;
   movieContainer.innerHTML = html;
-  charactersFilms(id);
+  showCharactersFilmsLinks(id);
   toggleTheme();
 }
 
 renderCharacterAbout(characterID);
 
-async function charactersFilms(id) {
+async function showCharactersFilmsLinks(id) {
   const characterFilms = document.querySelector('.character-films-featuring');
   const characterInfo = await loadCharacterInfo(id);
   let links = characterInfo.films;
