@@ -50,15 +50,13 @@ function closeDialog() {
   dialog.remove();
 }
 
-
 function onTreeNodeClick(event) {
   if (event.target.tagName !== 'SPAN') {
     return;
   }
   const title = event.target;
-  console.log(title);
   const ul = title.nextElementSibling;
-  if(ul) {
-    ul.classList.toggle('hidden')
+  if (ul) {
+    ul.classList.toggle('hidden');
   }
 }

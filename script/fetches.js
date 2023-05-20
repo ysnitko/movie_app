@@ -50,7 +50,7 @@ async function renderMovieAbout(id) {
   const html = `<div class="movie-about">
   <div class="movie-header">           
       <span>Star Wars: ${movie.title}. Episode ${movie.episode_id}</span>
-      <a class="add-favorites"><img src="./img/bookmark-add.svg" alt=""><span>Add to favorites</span></a>
+      <button class="add-favorites" data-id=${movie.id} onclick="addToFavorites(event)">adsad</button>
   </div>
   <img class="img-about" src="${movieCover.src_about}" alt="">
   <div class="movie-additional-info">
@@ -137,7 +137,6 @@ async function renderMovieCharacters(startIndex, endIndex, itemsOnPage) {
   final
     .slice(startIndex, endIndex)
     .forEach((character) => charactersContainer.append(character));
-  console.log(final);
   spinner.classList.remove('show');
   loadMoreButton.classList.remove('hidden');
 

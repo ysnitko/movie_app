@@ -138,13 +138,45 @@ function toggleTheme() {
   }
 }
 
-function store() {
+const favorites = document.querySelector('.favorites');
+let items = restore().favoritesItem;
+
+generateItemElement();
+async function generateItemElement() {
+  let movie = await loadMovie('all');
+  console.log(movie);
+  movie
+    .map((item) => {
+      const element = document.createElement('li');
+      element.setAttribute('data-movie', `${item.id}`);
+      element.classList.add('favorites-link');
+      const html = `<a href="index.html?id=${item.id}">${item.title}</a>`;
+      element.innerHTML = html;
+      return element;
+    })
+    .forEach((item) => favorites.appendChild(item));
+}
+
+function addToFavorites(event) {
+  const favoritesLinks = document.querySelectorAll('.favorites-link');
+  let target = event.target;
+  console.log(target.dataset.id);
+  for (let index = 0; index < favoritesLinks.length; index++) {
+    let element = favoritesLinks[index];
+    if (target.dataset.id === element.dataset.movie) {
+      element.classList.toggle('show');
+    }
+  }
+}
+
+function store(favoriteItems) {
   localStorage.setItem(
     'dataStorage',
     JSON.stringify({
       select: select.selectedIndex,
       themesChecked: toggleThemes.checked,
       layoutChecked: changeLayout.checked,
+      favoritesItem: favoriteItems,
     })
   );
 }

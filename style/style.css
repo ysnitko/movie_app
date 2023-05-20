@@ -444,7 +444,15 @@ footer {
   border: 1px solid var(--clr-border-bookmarks);
   border-radius: 2px;
   color: var(--clr-border-bookmarks);
-  cursor: pointer;
+  background-color: transparent;
+}
+
+.favorites {
+  padding: 0;
+}
+
+.favorites-link {
+  display: none;
 }
 
 .img-about {
@@ -645,6 +653,11 @@ footer {
 
 .hidden {
   display: none;
+}
+
+
+.show {
+  display: block;
 }
 
 .lds-ring {
