@@ -82,8 +82,7 @@ async function renderMovieAbout(id) {
   </div>
 `;
   movieContainer.innerHTML = html;
-  // loadMovieCharacters();
-  loadMore()
+  loadMore();
   toggleTheme();
 }
 
@@ -102,8 +101,8 @@ function loadMore() {
   const itemsOnPage = 7;
   let startIndex = (currentPage - 1) * itemsOnPage;
   let endIndex = currentPage * itemsOnPage;
-  renderMovieCharacters(startIndex, endIndex, itemsOnPage)
-  currentPage++
+  renderMovieCharacters(startIndex, endIndex, itemsOnPage);
+  currentPage++;
 }
 
 async function renderMovieCharacters(startIndex, endIndex, itemsOnPage) {
@@ -133,15 +132,17 @@ async function renderMovieCharacters(startIndex, endIndex, itemsOnPage) {
         <div class="character-title"><span>${character.name}</span></div>`;
       characterLink.innerHTML = html;
       return characterLink;
-    })
-    
-  final.slice(startIndex, endIndex).forEach((character) => charactersContainer.append(character));
+    });
+
+  final
+    .slice(startIndex, endIndex)
+    .forEach((character) => charactersContainer.append(character));
   console.log(final);
   spinner.classList.remove('show');
   loadMoreButton.classList.remove('hidden');
- 
-  if  (currentPage > Math.ceil(final.length / itemsOnPage)) { 
-    loadMoreButton.classList.add('hidden') 
+
+  if (currentPage > Math.ceil(final.length / itemsOnPage)) {
+    loadMoreButton.classList.add('hidden');
   }
 }
 
