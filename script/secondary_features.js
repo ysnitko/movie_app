@@ -28,7 +28,7 @@ function timeToNewEpisode() {
 let timer = setInterval(timeToNewEpisode, 1000);
 timeToNewEpisode();
 
-function openPromtDialog(text = DEFAULT_TEXT) {
+function openDialog(text = DEFAULT_TEXT) {
   let dialog = document.createElement('div');
   document.body.append(dialog);
   dialog.innerHTML = `
@@ -50,7 +50,7 @@ function closeDialog() {
   dialog.remove();
 }
 
-function onTreeNodeClick(event) {
+function onNavigationClick(event) {
   if (event.target.tagName !== 'SPAN') {
     return;
   }

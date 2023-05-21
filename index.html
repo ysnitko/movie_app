@@ -28,14 +28,14 @@
                             <span class="slider round"></span>
                         </label>
                     </div>
-                    <button type="button" class="authorization" onclick="openPromtDialog()"></button>
+                    <button type="button" class="authorization" onclick="openDialog()"></button>
                 </div>
             </div> 
          </div> 
      </header>
     <main class="main-container">
         <div class="menu-section">
-            <ul class="main-navigation" onclick="onTreeNodeClick(event)">
+            <ul class="main-navigation" onclick="onNavigationClick(event)">
                 <li>
                     <a href="./index.html">Main</a>  
                 </li>
@@ -65,8 +65,8 @@
                 <li><a href="">Last reviews #</a></li>
                 <li><a href="">NEW!!! Serials #</a></li>
                 <li>
-                    <span>Favorites</span>
-                    <ul class="favorites">
+                    <span>Favorites <span class="favorites-items">0</span></span>
+                    <ul class="favorites hidden">
                     </ul>
                 </li>
             </ul>
@@ -115,7 +115,7 @@
             <a href="">Privacy &AMP; Policy</a>
             <a href="">Press Room</a>
         </div>
-        <p class="copyrigth">&COPY; 2023 by Yuri Snitko</p>
+        <p class="copyright">&COPY; 2023 by Yuri Snitko</p>
     </footer>
     <script src="./script/secondary_features.js" async></script>
     <script src="./script/data.js"></script>
