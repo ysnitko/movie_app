@@ -143,7 +143,7 @@ let favoriteItems = restore().favoritesItem || [];
 console.log(favoriteItems);
 renderAllFavorites();
 
-async function renderFavorites() {
+async function renderFavorites(id) {
   const favoriteItem = document.createElement('li');
   let movie = await loadMovie(id);
   let html = `<a href="index.html?id=${id}">${movie.title}</a>`;
@@ -153,16 +153,22 @@ async function renderFavorites() {
 
 async function addToFavorites(event) {
   let target = event.target;
-  let link = await renderFavorites();
-  target.dataset.id === id;
-  favoriteItems.push(link);
+  let link = await renderFavorites(target.dataset.id);
+  favoriteItems.push({ target: target.dataset.id, title: link.textContent });
   console.log(favoriteItems);
   favorites.append(link);
   store(favoriteItems);
 }
 
-async function renderAllFavorites() {
-  favoriteItems.forEach((item) => favorites.append(item));
+function renderAllFavorites() {
+  favoriteItems
+    .map((item) => {
+      const favoriteItem = document.createElement('li');
+      let html = `<a href="index.html?id=${item.target}">${item.title}</a>`;
+      favoriteItem.innerHTML = html;
+      return favoriteItem;
+    })
+    .forEach((item) => favorites.append(item));
 }
 
 function store(favoriteItems) {
