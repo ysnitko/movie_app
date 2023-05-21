@@ -447,10 +447,8 @@ footer {
 
 .favorites {
   padding: 0;
-}
-
-.favorites-link {
-  display: none;
+  list-style-type: none;
+  font-size: 14px;
 }
 
 .img-about {
