@@ -41,9 +41,7 @@ async function loadAllMovies(id) {
   OnSortingItems();
   toggleTheme();
   OnChangeLayout();
-  renderAllFavorites();
   favoriteCountShow();
-  store(favoriteItems);
 }
 
 async function renderMovieAbout(id) {
@@ -87,10 +85,8 @@ async function renderMovieAbout(id) {
   movieContainer.innerHTML = html;
   loadMore();
   toggleTheme();
-  renderAllFavorites();
-  favoriteCountShow();
 
-  store(favoriteItems);
+  favoriteCountShow();
 }
 
 renderMovieAbout(id);
@@ -184,7 +180,6 @@ async function renderCharacterAbout(id) {
   movieContainer.innerHTML = html;
   showCharactersFilmsLinks(id);
   toggleTheme();
-  renderAllFavorites();
   favoriteCountShow();
 }
 
@@ -200,7 +195,7 @@ async function showCharactersFilmsLinks(id) {
     .map((link) => {
       const links = document.createElement('a');
       links.setAttribute('href', `index.html?id=${link.id}`);
-      links.textContent = `${link.title} \n`;
+      links.textContent = `${link.title}`;
       characterFilms.append(links);
     });
 }

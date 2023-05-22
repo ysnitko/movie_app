@@ -452,12 +452,9 @@ footer {
 }
 
 .main-navigation li span .favorites-items {
-  font-size: 10px;
-  vertical-align: middle;
-  padding-inline: 5px;
-  border-radius: 50%;
-  background-color: var(--clr-secondary);
-  color: var(--clr-primary);
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--clr-timer);
 }
 
 .img-about {

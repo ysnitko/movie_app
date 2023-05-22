@@ -2,11 +2,11 @@ const select = document.querySelector('#sorting');
 const toggleThemes = document.querySelector('#checkbox');
 const changeLayout = document.querySelector('.layouts');
 const favorites = document.querySelector('.favorites');
-let favoriteItems = restore().favoritesItem || [];
-
 changeLayout.checked = restore().layoutChecked || false;
 toggleThemes.checked = restore().themesChecked || false;
 select.selectedIndex = restore().select || 0;
+let favoriteItems = restore().favoritesItem || [];
+console.log(typeof favoriteItems);
 
 function OnSortingItems() {
   const movieItems = document.querySelector('.movie-items');
@@ -62,7 +62,7 @@ function OnSortingItems() {
       return releaseDateB - releaseDateA;
     });
   }
-  store();
+  store(select.selectedIndex);
   movieItems.innerHTML = '';
   movieList.forEach((movie) => {
     movieItems.appendChild(movie);
@@ -92,6 +92,7 @@ function OnChangeLayout() {
     });
     store(changeLayout.checked);
   }
+  favoriteCountShow();
 }
 
 async function searchItems(event) {
@@ -138,6 +139,7 @@ function toggleTheme() {
     document.body.classList.remove('dark-theme');
     store(toggleThemes.checked);
   }
+  favoriteCountShow();
 }
 
 async function addToFavorites(event) {
@@ -149,7 +151,6 @@ async function addToFavorites(event) {
   favoriteItems.push({ target: target.dataset.id, title: link.textContent });
   favorites.append(link);
   favoriteCountShow();
-  store(favoriteItems);
 }
 
 async function renderFavorites(id) {
@@ -161,23 +162,23 @@ async function renderFavorites(id) {
 }
 
 function renderAllFavorites() {
-  favoriteItems.forEach(async (item) =>
-    favorites.append(await renderFavorites(item.target))
-  );
+  favoriteItems
+    .map(async (item) => await renderFavorites(item.target))
+    .forEach(async (item) => favorites.append(await item));
   // {
   // const favoriteItem = document.createElement('li');
   // let html = `<a href="index.html?id=${item.target}">${item.title}</a>`;
   // favoriteItem.innerHTML = html;
   // return favoriteItem;
 }
+
 renderAllFavorites();
 
 function favoriteCountShow() {
   const favoriteCount = document.querySelector('.favorites-items');
   favoriteCount.textContent = `${favoriteItems.length}`;
-  console.log(favoriteItems.length);
+  store(favoriteItems);
 }
-favoriteCountShow();
 
 function store(favoriteItems) {
   localStorage.setItem(
