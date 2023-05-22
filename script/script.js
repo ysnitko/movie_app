@@ -61,12 +61,12 @@ function OnSortingItems() {
       return releaseDateB - releaseDateA;
     });
   }
-
   store(select.selectedIndex);
+  // movieList.innerHTML = '';
   movieList.forEach((movie) => {
     movieItems.appendChild(movie);
-    favoriteCountShow();
   });
+  favoriteCountShow();
 }
 
 function OnChangeLayout() {
