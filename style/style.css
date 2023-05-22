@@ -437,12 +437,17 @@ footer {
 }
 
 .add-favorites {
-  padding: 10px;
-  font-size: 14px;
+  padding: 5px 10px;
+  font-size: 12px;
   border: 1px solid var(--clr-border-bookmarks);
   border-radius: 2px;
   color: var(--clr-border-bookmarks);
   background-color: transparent;
+}
+
+.add-favorites::before {
+  content: url(../img/bookmark-add.svg);
+  vertical-align: middle;
 }
 
 .favorites {

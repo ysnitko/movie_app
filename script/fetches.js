@@ -41,7 +41,7 @@ async function loadAllMovies(id) {
   OnSortingItems();
   toggleTheme();
   OnChangeLayout();
-  favoriteCountShow();
+  // favoriteCountShow();
 }
 
 async function renderMovieAbout(id) {
@@ -85,8 +85,7 @@ async function renderMovieAbout(id) {
   movieContainer.innerHTML = html;
   loadMore();
   toggleTheme();
-
-  favoriteCountShow();
+  // favoriteCountShow();
 }
 
 renderMovieAbout(id);
@@ -180,7 +179,7 @@ async function renderCharacterAbout(id) {
   movieContainer.innerHTML = html;
   showCharactersFilmsLinks(id);
   toggleTheme();
-  favoriteCountShow();
+  // favoriteCountShow();
 }
 
 renderCharacterAbout(characterID);

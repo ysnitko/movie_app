@@ -6,7 +6,6 @@ changeLayout.checked = restore().layoutChecked || false;
 toggleThemes.checked = restore().themesChecked || false;
 select.selectedIndex = restore().select || 0;
 let favoriteItems = restore().favoritesItem || [];
-console.log(typeof favoriteItems);
 
 function OnSortingItems() {
   const movieItems = document.querySelector('.movie-items');
@@ -62,10 +61,11 @@ function OnSortingItems() {
       return releaseDateB - releaseDateA;
     });
   }
+
   store(select.selectedIndex);
-  movieItems.innerHTML = '';
   movieList.forEach((movie) => {
     movieItems.appendChild(movie);
+    favoriteCountShow();
   });
 }
 
@@ -162,14 +162,9 @@ async function renderFavorites(id) {
 }
 
 function renderAllFavorites() {
-  favoriteItems
+  return favoriteItems
     .map(async (item) => await renderFavorites(item.target))
     .forEach(async (item) => favorites.append(await item));
-  // {
-  // const favoriteItem = document.createElement('li');
-  // let html = `<a href="index.html?id=${item.target}">${item.title}</a>`;
-  // favoriteItem.innerHTML = html;
-  // return favoriteItem;
 }
 
 renderAllFavorites();
@@ -187,7 +182,7 @@ function store(favoriteItems) {
       select: select.selectedIndex,
       themesChecked: toggleThemes.checked,
       layoutChecked: changeLayout.checked,
-      favoritesItem: favoriteItems,
+      favoritesItem: Array.from(favoriteItems),
     })
   );
 }
