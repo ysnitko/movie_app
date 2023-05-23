@@ -37,11 +37,10 @@ async function loadAllMovies(id) {
       linkMovie.innerHTML = html;
       return linkMovie;
     })
-    .forEach((movie) => movieItems.appendChild(movie));
+    .forEach((movie) => movieItems.append(movie));
   OnSortingItems();
   toggleTheme();
   OnChangeLayout();
-  // favoriteCountShow();
 }
 
 async function renderMovieAbout(id) {
@@ -85,7 +84,6 @@ async function renderMovieAbout(id) {
   movieContainer.innerHTML = html;
   loadMore();
   toggleTheme();
-  // favoriteCountShow();
 }
 
 renderMovieAbout(id);
@@ -179,7 +177,6 @@ async function renderCharacterAbout(id) {
   movieContainer.innerHTML = html;
   showCharactersFilmsLinks(id);
   toggleTheme();
-  // favoriteCountShow();
 }
 
 renderCharacterAbout(characterID);

@@ -2,9 +2,10 @@ const select = document.querySelector('#sorting');
 const toggleThemes = document.querySelector('#checkbox');
 const changeLayout = document.querySelector('.layouts');
 const favorites = document.querySelector('.favorites');
-changeLayout.checked = restore().layoutChecked || false;
+
 toggleThemes.checked = restore().themesChecked || false;
 select.selectedIndex = restore().select || 0;
+changeLayout.checked = restore().layoutChecked || false;
 let favoriteItems = restore().favoritesItem || [];
 
 function OnSortingItems() {
@@ -141,6 +142,8 @@ function toggleTheme() {
   }
   favoriteCountShow();
 }
+
+toggleTheme();
 
 async function addToFavorites(event) {
   let target = event.target;
