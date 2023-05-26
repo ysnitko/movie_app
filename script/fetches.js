@@ -43,8 +43,6 @@ async function renderAllMovies(id) {
   OnChangeLayout();
 }
 
-renderMovieAbout(id);
-
 async function renderMovieAbout(id) {
   const movie = await loadMovie(id);
   const movieContainer = document.querySelector('.movies-container');
@@ -87,6 +85,8 @@ async function renderMovieAbout(id) {
   renderMovieCharacters();
   toggleTheme();
 }
+
+renderMovieAbout(id);
 
 async function loadCharacterInfo(id) {
   const response = await fetch(
