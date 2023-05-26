@@ -120,7 +120,7 @@ async function renderMovieCharacters() {
 }
 
 function generateCharacters(characters) {
-  let count = 0;
+  // let count = 0;
   const charactersContainer = document.querySelector('.characters-container');
   for (let i = 0; i < characters.length; i++) {
     // if (
@@ -135,7 +135,7 @@ function generateCharacters(characters) {
     // if (count >= 7) {
     //   return;
     // }
-    count++;
+    // count++;
     let item = document.createElement('a');
     item.classList.add('character-link');
     item.setAttribute('href', `index.html?character=${characters[i].id}`);
