@@ -1,8 +1,9 @@
 const searchParams = new URLSearchParams(location.search);
 const id = searchParams.get('id') || 'all';
-const characterID = searchParams.get('character');
+const characterID = searchParams.get('character') || 0;
+let charactersAll = [];
 
-loadAllMovies(id);
+renderAllMovies(id);
 
 async function loadMovie(id) {
   const response = await fetch(
@@ -12,17 +13,16 @@ async function loadMovie(id) {
   return data;
 }
 
-async function loadAllMovies(id) {
+async function renderAllMovies(id) {
   const movieItems = document.querySelector('.movie-items');
-  const promises = loadMovie(id);
-  let movieList = await Promise.resolve(promises);
+  const movieList = await loadMovie(id);
   movieList
     .map((movie) => {
       const linkMovie = document.createElement('a');
       linkMovie.classList.add('movie-item');
       linkMovie.setAttribute('data-id', `${movie.id}`);
       linkMovie.setAttribute('href', `index.html?id=${movie.id}`);
-      const movieCover = MOVIE_COVER.find((cover) => cover.id === movie.id);
+      const movieCover = MOVIE_INFO.find((cover) => cover.id === movie.id);
       html = `
       <div class="img-container">
       <img src="${movieCover.src}" class="movie-cover" alt="movie"> 
@@ -43,16 +43,18 @@ async function loadAllMovies(id) {
   OnChangeLayout();
 }
 
+renderMovieAbout(id);
+
 async function renderMovieAbout(id) {
   const movie = await loadMovie(id);
   const movieContainer = document.querySelector('.movies-container');
-  const movieCover = MOVIE_COVER.find((cover) => cover.id === movie.id);
+  const movieCover = MOVIE_INFO.find((cover) => cover.id === movie.id);
   const html = `<div class="movie-about">
   <div class="movie-header">           
       <span>Star Wars: ${movie.title}. Episode ${movie.episode_id}</span>
       <button class="add-favorites" data-id=${movie.id} onclick="addToFavorites(event)">Add to Favorites</button>
   </div>
-  <img class="img-about" src="${movieCover.src_about}" alt="">
+  <img class="img-about" src="${movieCover.aboutImg}" alt="">
   <div class="movie-additional-info">
       <div class="release-creating-info">
           <p>Release date: <span>${movie.release_date}</span></p>
@@ -70,79 +72,20 @@ async function renderMovieAbout(id) {
   <div class="characters">
     <span>Characters:</span>
     <div class="characters-container">
-    <div class="lds-ring spinner">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-    <button id="loadMoreCharacters" onclick="loadMore()"></button>
+      <div class="lds-ring spinner">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+      </div>
+    <button id="loadMoreCharacters" onclick="renderMovieCharacters()"></button>
     </div>
   </div>
   </div>
 `;
   movieContainer.innerHTML = html;
-  loadMore();
+  renderMovieCharacters();
   toggleTheme();
-}
-
-renderMovieAbout(id);
-
-async function loadCharacter(id) {
-  const response = await fetch(
-    `https://desfarik.github.io/star-wars/api/people/${id}.json`
-  );
-  const data = await response.json();
-  return data;
-}
-
-let currentPage = 1;
-function loadMore() {
-  const itemsOnPage = 7;
-  let startIndex = (currentPage - 1) * itemsOnPage;
-  let endIndex = currentPage * itemsOnPage;
-  renderMovieCharacters(startIndex, endIndex, itemsOnPage);
-  currentPage++;
-}
-
-async function renderMovieCharacters(startIndex, endIndex, itemsOnPage) {
-  const loadMoreButton = document.querySelector('#loadMoreCharacters');
-  const charactersContainer = document.querySelector('.characters-container');
-  const promises = Array.from({ length: 87 }, (_, i) => loadCharacter(i + 1));
-  const spinner = document.querySelector('.spinner');
-  spinner.classList.add('show');
-  loadMoreButton.classList.add('hidden');
-  let charactersList = await Promise.all(promises);
-  let movie = await loadMovie(id);
-  let final = charactersList
-    .filter((character) => {
-      return character.films.includes(`${movie.id}`);
-    })
-    .map((character) => {
-      const characterLink = document.createElement('a');
-      characterLink.classList.add('character-link');
-      characterLink.setAttribute(
-        'href',
-        `index.html?character=${character.id}`
-      );
-      const html = `  
-      <div>
-      <img src="${character.image}" class="character-cover" alt="movie"> 
-      </div>
-        <div class="character-title"><span>${character.name}</span></div>`;
-      characterLink.innerHTML = html;
-      return characterLink;
-    });
-
-  final
-    .slice(startIndex, endIndex)
-    .forEach((character) => charactersContainer.append(character));
-  spinner.classList.remove('show');
-  loadMoreButton.classList.remove('hidden');
-
-  if (currentPage > Math.ceil(final.length / itemsOnPage)) {
-    loadMoreButton.classList.add('hidden');
-  }
 }
 
 async function loadCharacterInfo(id) {
@@ -153,10 +96,102 @@ async function loadCharacterInfo(id) {
   return data;
 }
 
+async function getCharactersList() {
+  const character = await loadCharacterInfo('all');
+  const movie = await loadMovie(id);
+  if (charactersAll.length === 0) {
+    movie.characters.map((item) => {
+      charactersAll.push(character[item - 1]);
+    });
+  }
+  return charactersAll;
+}
+
+async function renderMovieCharacters() {
+  const loadMoreButton = document.querySelector('#loadMoreCharacters');
+  loadMoreButton.classList.remove('show');
+  const spinner = document.querySelector('.spinner');
+  spinner.classList.add('show');
+  charactersAll = await getCharactersList();
+  console.log(charactersAll);
+  generateCharacters(charactersAll);
+  spinner.classList.remove('show');
+  loadMoreButton.classList.add('show');
+}
+
+function generateCharacters(characters) {
+  let count = 0;
+  const charactersContainer = document.querySelector('.characters-container');
+  for (let i = 0; i < characters.length; i++) {
+    // if (
+    //   charactersContainer.childElementCount % 7 !== 0 &&
+    //   charactersContainer.childElementCount !== 0
+    // ) {
+    //   i = charactersContainer.childElementCount;
+    // }
+    // if (charactersContainer.childElementCount >= characters.length) {
+    //   return;
+    // }
+    // if (count >= 7) {
+    //   return;
+    // }
+    count++;
+    let item = document.createElement('a');
+    item.classList.add('character-link');
+    item.setAttribute('href', `index.html?character=${characters[i].id}`);
+    item.innerHTML = generateCharacter(characters[i]);
+    charactersContainer.append(item);
+  }
+
+  if (charactersContainer.childElementCount >= characters.length) {
+    const loadMoreButton = document.querySelector('#loadMoreCharacters');
+    loadMoreButton.remove();
+  }
+}
+
+function generateCharacter(character) {
+  return `<img src="${character.image}" class="character-cover" alt="movie">
+          <div class="character-title"><span>${character.name}</span></div>`;
+}
+
+// async function renderMovieCharacters(startIndex, endIndex, itemsOnPage) {
+//   const loadMoreButton = document.querySelector("#loadMoreCharacters");
+//   const charactersContainer = document.querySelector(".characters-container");
+//   let charactersList = await getCharactersList();
+//   console.log(charactersList);
+//   const spinner = document.querySelector(".spinner");
+//   // spinner.classList.add("show");
+//   loadMoreButton.classList.add("hidden");
+//   charactersList
+//     .map((character) => {
+//       const characterLink = document.createElement("a");
+//       characterLink.classList.add("character-link");
+//       characterLink.setAttribute(
+//         "href",
+//         `index.html?character=${character.id}`
+//       );
+//       const html = `
+//       <div>
+//       <img src="${character.image}" class="character-cover" alt="movie">
+//       </div>
+//         <div class="character-title"><span>${character.name}</span></div>`;
+//       characterLink.innerHTML = html;
+//       return characterLink;
+//     })
+//     .slice(startIndex, endIndex)
+//     .forEach((character) => charactersContainer.append(character));
+//   spinner.classList.remove("show");
+//   loadMoreButton.classList.remove("hidden");
+//   if (currentPage > Math.ceil(charactersList.length / itemsOnPage)) {
+//     loadMoreButton.classList.add("hidden");
+//   }
+// }
+
 async function renderCharacterAbout(id) {
   const characterInfo = await loadCharacterInfo(id);
+  console.log(characterInfo);
   const movieContainer = document.querySelector('.movies-container');
-  const html = `<div class="character-about"> 
+  const html = `<div class="character-about">
                   <img class="character-image" src="${characterInfo.image}" alt="">
                   <div class="character-description">
                     <p class="character-name">Name: <span>${characterInfo.name}</span></p>
