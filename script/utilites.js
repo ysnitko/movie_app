@@ -1,6 +1,6 @@
-const select = document.querySelector("#sorting");
-const toggleThemes = document.querySelector("#checkbox");
-const changeLayout = document.querySelector(".layouts");
+const select = document.querySelector('#sorting');
+const toggleThemes = document.querySelector('#checkbox');
+const changeLayout = document.querySelector('.layouts');
 
 toggleThemes.checked = (restore() && restore().themes) || false;
 select.selectedIndex = (restore() && restore().selected) || 0;
@@ -25,7 +25,7 @@ async function getCharacterInfo(characterID) {
 }
 
 async function getCharactersList() {
-  const character = await getCharacterInfo("all");
+  const character = await getCharacterInfo('all');
   const movie = await getMovie(id);
   if (charactersAll.length === 0) {
     movie.characters.map((item) => {
@@ -40,17 +40,17 @@ function getMovieData(data) {
 }
 
 function OnSortingItems() {
-  const movieItems = document.querySelector(".movie-items");
-  const movieList = Array.from(document.querySelectorAll(".movie-item"));
+  const movieItems = document.querySelector('.movie-items');
+  const movieList = Array.from(document.querySelectorAll('.movie-item'));
   if (select.selectedIndex === 0) {
     movieList.sort((a, b) => {
       const movieEpisodeA = a
-        .querySelector(".movie-episode span")
-        .textContent.split(" ")
+        .querySelector('.movie-episode span')
+        .textContent.split(' ')
         .slice(-1);
       const movieEpisodeB = b
-        .querySelector(".movie-episode span")
-        .textContent.split(" ")
+        .querySelector('.movie-episode span')
+        .textContent.split(' ')
         .slice(-1);
       return movieEpisodeA - movieEpisodeB;
     });
@@ -59,12 +59,12 @@ function OnSortingItems() {
   if (select.selectedIndex === 1) {
     movieList.sort((a, b) => {
       const movieEpisodeA = a
-        .querySelector(".movie-episode span")
-        .textContent.split(" ")
+        .querySelector('.movie-episode span')
+        .textContent.split(' ')
         .slice(-1);
       const movieEpisodeB = b
-        .querySelector(".movie-episode span")
-        .textContent.split(" ")
+        .querySelector('.movie-episode span')
+        .textContent.split(' ')
         .slice(-1);
       return movieEpisodeB - movieEpisodeA;
     });
@@ -73,10 +73,10 @@ function OnSortingItems() {
   if (select.selectedIndex === 2) {
     movieList.sort((a, b) => {
       const releaseDateA = new Date(
-        a.querySelector(".movie-created span").textContent.split(" ").slice(-1)
+        a.querySelector('.movie-created span').textContent.split(' ').slice(-1)
       );
       const releaseDateB = new Date(
-        b.querySelector(".movie-created span").textContent.split(" ").slice(-1)
+        b.querySelector('.movie-created span').textContent.split(' ').slice(-1)
       );
       return releaseDateA - releaseDateB;
     });
@@ -85,10 +85,10 @@ function OnSortingItems() {
   if (select.selectedIndex === 3) {
     movieList.sort((a, b) => {
       const releaseDateA = new Date(
-        a.querySelector(".movie-created span").textContent.split(" ").slice(-1)
+        a.querySelector('.movie-created span').textContent.split(' ').slice(-1)
       );
       const releaseDateB = new Date(
-        b.querySelector(".movie-created span").textContent.split(" ").slice(-1)
+        b.querySelector('.movie-created span').textContent.split(' ').slice(-1)
       );
       return releaseDateB - releaseDateA;
     });
@@ -101,24 +101,24 @@ function OnSortingItems() {
 }
 
 function OnChangeLayout() {
-  const movieItem = document.querySelectorAll(".movie-item");
-  const movieCrawl = document.querySelectorAll(".movie-crawl");
-  const movieItems = document.querySelector(".movie-items");
+  const movieItem = document.querySelectorAll('.movie-item');
+  const movieCrawl = document.querySelectorAll('.movie-crawl');
+  const movieItems = document.querySelector('.movie-items');
   if (changeLayout.checked) {
-    movieItems.classList.add("active-layout");
+    movieItems.classList.add('active-layout');
     movieItem.forEach((item) => {
-      item.classList.add("active-item");
+      item.classList.add('active-item');
     });
     movieCrawl.forEach((item) => {
-      item.style.display = "block";
+      item.style.display = 'block';
     });
   } else {
-    movieItems.classList.remove("active-layout");
+    movieItems.classList.remove('active-layout');
     movieItem.forEach((item) => {
-      item.classList.remove("active-item");
+      item.classList.remove('active-item');
     });
     movieCrawl.forEach((item) => {
-      item.style.display = "-webkit-box";
+      item.style.display = '-webkit-box';
     });
   }
   store(changeLayout.checked);
@@ -127,10 +127,10 @@ function OnChangeLayout() {
 
 async function searchItems(event) {
   event.preventDefault();
-  const searchInput = document.querySelector("#search-input");
-  const movieItems = document.querySelector(".movie-items");
+  const searchInput = document.querySelector('#search-input');
+  const movieItems = document.querySelector('.movie-items');
   const phrase = searchInput.value.toLowerCase();
-  movieItems.innerHTML = "";
+  movieItems.innerHTML = '';
   const movieList = await getMovie(id);
   movieList
     .filter((movie) => {
@@ -140,10 +140,10 @@ async function searchItems(event) {
       );
     })
     .forEach((movie) => {
-      const linkMovie = document.createElement("a");
-      linkMovie.classList.add("movie-item");
-      linkMovie.setAttribute("data-id", `${movie.id}`);
-      linkMovie.setAttribute("href", `index.html?id=${movie.id}`);
+      const linkMovie = document.createElement('a');
+      linkMovie.classList.add('movie-item');
+      linkMovie.setAttribute('data-id', `${movie.id}`);
+      linkMovie.setAttribute('href', `index.html?id=${movie.id}`);
       html = `
       <div class="img-container">
       <img src="${getMovieData(movie).src}" class="movie-cover" alt="movie"> 
@@ -166,9 +166,9 @@ async function searchItems(event) {
 
 function toggleTheme() {
   if (toggleThemes.checked) {
-    document.body.classList.add("dark-theme");
+    document.body.classList.add('dark-theme');
   } else {
-    document.body.classList.remove("dark-theme");
+    document.body.classList.remove('dark-theme');
   }
   store(toggleThemes);
   favoriteCountShow();
@@ -176,7 +176,7 @@ function toggleTheme() {
 
 function store(changeLayout) {
   localStorage.setItem(
-    "dataStorage",
+    'dataStorage',
     JSON.stringify({
       selected: select.selectedIndex,
       themes: toggleThemes.checked,
@@ -187,13 +187,5 @@ function store(changeLayout) {
 }
 
 function restore() {
-  return JSON.parse(localStorage.getItem("dataStorage")) || [];
-}
-
-function storeFavorites() {
-  localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
-}
-
-function restoreFavorites() {
-  return JSON.parse(localStorage.getItem("favoriteItems")) || [];
+  return JSON.parse(localStorage.getItem('dataStorage')) || [];
 }
