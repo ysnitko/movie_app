@@ -31,7 +31,7 @@ async function renderFavorites(id) {
   favoriteItem.classList.add('favorites-item');
   favoriteItem.setAttribute('data-id', id);
   let movie = await getMovie(id);
-  let html = `<a class="favorites-link" href="index.html?id=${id}">
+  let html = `<a class="favorites-link" href="film.html?id=${id}">
   <img class="favorites-cover" src="${
     getMovieData(movie).aboutImg
   }" title="movie">

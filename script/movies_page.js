@@ -1,6 +1,3 @@
-const searchParams = new URLSearchParams(location.search);
-let id = searchParams.get('id') || 'all';
-
 renderAllMovies();
 
 async function renderAllMovies() {
@@ -11,7 +8,7 @@ async function renderAllMovies() {
       const linkMovie = document.createElement('a');
       linkMovie.classList.add('movie-item');
       linkMovie.setAttribute('data-id', `${movie.id}`);
-      linkMovie.setAttribute('href', `index.html?id=${movie.id}`);
+      linkMovie.setAttribute('href', `film.html?id=${movie.id}`);
       html = `
         <div class="img-container">
         <img src="${getMovieData(movie).src}" class="movie-cover" alt="movie"> 

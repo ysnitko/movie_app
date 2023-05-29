@@ -1,5 +1,3 @@
-const characterID = searchParams.get('character') || 0;
-
 renderCharacterAbout();
 
 async function renderCharacterAbout() {
@@ -38,7 +36,7 @@ async function showCharactersFilmsLinks() {
     .filter((link) => links.includes(link.id.toString()))
     .map((link) => {
       const links = document.createElement('a');
-      links.setAttribute('href', `index.html?id=${link.id}`);
+      links.setAttribute('href', `film.html?id=${link.id}`);
       links.textContent = `${link.title}`;
       characterFilms.append(links);
     });

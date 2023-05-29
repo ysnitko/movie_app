@@ -1,11 +1,14 @@
 const select = document.querySelector('#sorting');
 const toggleThemes = document.querySelector('#checkbox');
 const changeLayout = document.querySelector('.layouts');
+const searchParams = new URLSearchParams(location.search);
+let id = searchParams.get('id') || 'all';
+const characterID = searchParams.get('character') || 0;
 
-toggleThemes.checked = (restore() && restore().themes) || false;
-select.selectedIndex = (restore() && restore().selected) || 0;
-changeLayout.checked = (restore() && restore().layout) || false;
-let favoriteItems = (restore() && restore().favoritesItem) || [];
+toggleThemes.checked = restore().themes || false;
+select.selectedIndex = restore().selected || 0;
+changeLayout.checked = restore().layout || false;
+let favoriteItems = restore().favoritesItem || [];
 let charactersAll = [];
 
 async function getMovie(id) {
@@ -143,7 +146,7 @@ async function searchItems(event) {
       const linkMovie = document.createElement('a');
       linkMovie.classList.add('movie-item');
       linkMovie.setAttribute('data-id', `${movie.id}`);
-      linkMovie.setAttribute('href', `index.html?id=${movie.id}`);
+      linkMovie.setAttribute('href', `film.html?id=${movie.id}`);
       html = `
       <div class="img-container">
       <img src="${getMovieData(movie).src}" class="movie-cover" alt="movie"> 

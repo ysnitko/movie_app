@@ -1,3 +1,5 @@
+renderMovieAbout();
+
 async function renderMovieAbout() {
   const movie = await getMovie(id);
   const movieContainer = document.querySelector('.movies-container');
@@ -43,8 +45,6 @@ async function renderMovieAbout() {
   changeBtnStyle();
 }
 
-renderMovieAbout();
-
 function changeBtnStyle() {
   const favoriteBtn = document.querySelector('.add-favorites');
   favoriteItems.forEach((item) => {
@@ -57,8 +57,8 @@ function changeBtnStyle() {
 
 async function renderMovieCharacters() {
   const loadMoreButton = document.querySelector('#loadMoreCharacters');
-  loadMoreButton.classList.remove('show');
   const spinner = document.querySelector('.spinner');
+  loadMoreButton.classList.remove('show');
   spinner.classList.add('show');
   charactersAll = await getCharactersList();
   generateCharacters(charactersAll);
@@ -84,7 +84,7 @@ function generateCharacters(characters) {
     element.classList.add('character-link');
     element.setAttribute(
       'href',
-      `index.html?character=${characters[index].id}`
+      `character.html?character=${characters[index].id}`
     );
     element.innerHTML = generateCharacter(characters[index]);
     charactersContainer.append(element);
