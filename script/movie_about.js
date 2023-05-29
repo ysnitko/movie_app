@@ -1,5 +1,3 @@
-renderMovieAbout();
-
 async function renderMovieAbout() {
   const movie = await getMovie(id);
   const movieContainer = document.querySelector('.movies-container');
@@ -44,6 +42,8 @@ async function renderMovieAbout() {
   toggleTheme();
   changeBtnStyle();
 }
+
+renderMovieAbout();
 
 function changeBtnStyle() {
   const favoriteBtn = document.querySelector('.add-favorites');
