@@ -254,13 +254,16 @@ h3 {
 .movie-items {
   display: grid;
   grid-template-columns: repeat(auto-fill, 230px);
-  /* justify-content: space-between; */
   gap: 20px;
 }
 
 .active-layout {
   grid-template-columns: none;
   justify-content: left;
+}
+
+.active-layout .movie-item {
+  flex-direction: inherit;
 }
 
 .movie-item {
