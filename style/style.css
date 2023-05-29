@@ -21,6 +21,7 @@
   --clr-border-bookmarks: #5abcf5;
   --clr-background-dialog: rgba(202, 199, 199, 0.4);
   --ff-primary: "Noto Sans", sans-serif;
+  /* --ff-secondary: "Star Wars", sans-serif; */
   --fz-primary: 14px;
 }
 
@@ -28,7 +29,6 @@ body {
   background: var(--clr-body);
   background-attachment: fixed;
   font-family: var(--ff-primary);
-  /* font-size: var(--fz-primary); */
 }
 
 .dark-theme {
@@ -53,6 +53,7 @@ main {
 }
 
 h3 {
+  font-size: 28px;
   color: var(--clr-secondary);
 }
 
@@ -447,17 +448,31 @@ footer {
 }
 
 .add-favorites {
-  padding: 5px 10px;
+  display: grid;
+  place-items: center;
+  padding: 5px 15px;
   font-size: 12px;
-  border: 1px solid var(--clr-border-bookmarks);
-  border-radius: 2px;
-  color: var(--clr-border-bookmarks);
+  white-space: nowrap;
+  outline: 1px solid var(--clr-border-bookmarks);
   background-color: transparent;
+  border: 1px solid var(--clr-border-bookmarks);
+  border-radius: 4px;
+  color: var(--clr-border-bookmarks);
+  transition: outline-offset 0.1s ease-in-out;
 }
 
-.add-favorites-active {
+.add-favorites:hover {
+  outline-offset: 4px;
+  outline: 2px solid var(--clr-border-bookmarks);
+}
+
+.in-favorites {
   background-color: var(--clr-movie-info);
   color: var(--clr-main-container);
+}
+
+.out-favorites {
+  background-color: transparent;
 }
 
 .favorites {

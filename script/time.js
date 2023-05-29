@@ -202,3 +202,58 @@ async function showCharactersFilmsLinks(id) {
       characterFilms.append(links);
     });
 }
+
+// for (let i = 0; i < characters.length; i++) {
+//     if (
+//       charactersContainer.childElementCount % 7 !== 0 &&
+//       charactersContainer.childElementCount !== 0
+//     ) {
+//       i = charactersContainer.childElementCount;
+//     }
+//     if (charactersContainer.childElementCount - 2 >= characters.length) {
+//       return;
+//     }
+//     if (count >= 7) {
+//       return;
+//     }
+//     count++;
+//     let item = document.createElement('a');
+//     item.classList.add('character-link');
+//     item.setAttribute('href', `index.html?character=${characters[i].id}`);
+//     item.innerHTML = generateCharacter(characters[i]);
+//     charactersContainer.append(item);
+//   }
+
+//   if (charactersContainer.childElementCount >= characters.length) {
+//     const loadMoreButton = document.querySelector('#loadMoreCharacters');
+//     loadMoreButton.remove();
+//   }
+// }
+
+// function generateCharacter(character) {
+//   return `<img src="${character.image}" class="character-cover" alt="movie">
+//           <div class="character-title"><span>${character.name}</span></div>`;
+
+function addToFavorites(event) {
+  if (!event.target.classList.contains('favorite')) {
+    return;
+  }
+  let targetFilm = event.target.closest('.film');
+  let newFavoriteFilm = {
+    episode: `${targetFilm.dataset.episode}`,
+    title: `${targetFilm.dataset.title}`,
+  };
+  if (event.target.classList.contains('active')) {
+    event.target.classList.remove('active');
+    favorites = favorites.filter(
+      (film) => +film.episode !== +targetFilm.dataset.episode
+    );
+    storeFavoriteItems();
+    generateFavoriteFilms();
+  } else {
+    event.target.classList.add('active');
+    favorites.push(newFavoriteFilm);
+    storeFavoriteItems();
+    generateFavoriteFilms();
+  }
+}
