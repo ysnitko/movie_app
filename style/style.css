@@ -632,6 +632,7 @@ footer {
   flex-direction: column;
   padding-left: 10px;
   gap: 4px;
+  background: url(../img/mando.svg) no-repeat top right;
 }
 
 .character-description > span {
