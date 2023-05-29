@@ -476,12 +476,15 @@ footer {
 }
 
 .favorites {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   padding: 0;
   list-style-type: none;
-  font-size: 14px;
 }
 
 .main-navigation li span .favorites-items {
+  margin-bottom: 10px;
   font-size: 12px;
   font-weight: bold;
   color: var(--clr-timer);
@@ -491,6 +494,29 @@ footer {
   display: block;
   width: 100%;
   margin: 0 auto;
+}
+
+.favorites-cover {
+  width: 100%;
+}
+
+.main-navigation li .favorites-item {
+  padding: 0;
+}
+
+.favorites-link {
+  display: flex;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.favorites-link:hover {
+  opacity: 0.7;
+}
+
+.main-navigation li .favorites-category:hover {
+  transition: none;
+  background-size: 0;
 }
 
 .movie-additional-info {
@@ -585,24 +611,37 @@ footer {
 /* characters about */
 .character-about {
   display: flex;
-  gap: 20px;
+  justify-content: space-between;
+  gap: 15px;
 }
 
 .character-image {
   max-width: 30%;
   padding: 10px;
   border: 1px solid var(--clr-secondary);
+  object-fit: cover;
+  object-position: top;
 }
 
 .character-description {
   display: flex;
+  width: 100%;
   flex-direction: column;
   padding-left: 10px;
   gap: 4px;
 }
 
+.character-description > span {
+  font-size: 18px;
+  font-weight: bold;
+  opacity: 0.5;
+  color: var(--clr-secondary);
+}
+
 .character-name {
-  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 30px;
+  font-weight: 700;
 }
 
 .character-wiki a {

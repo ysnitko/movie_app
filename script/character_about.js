@@ -8,7 +8,8 @@ async function renderCharacterAbout() {
   const html = `<div class="character-about">
                     <img class="character-image" src="${characterInfo.image}" alt="">
                     <div class="character-description">
-                      <p class="character-name">Name: <span>${characterInfo.name}</span></p>
+                      <p class="character-name">${characterInfo.name}</p>
+                      <span>About character</span>
                       <p class="character-birth">Birth year: <span>${characterInfo.birth_year}</span></p>
                       <p class="character-gender">Gender: <span>${characterInfo.gender}</span></p>
                       <p class="character-species">Species: <span>${characterInfo.species}</span></p>
