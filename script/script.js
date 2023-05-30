@@ -1,6 +1,6 @@
-const releaseTimeContainer = document.querySelector(".release-time");
-const flashingDot = document.querySelector(".flashing-dot");
-const DEFAULT_TEXT = "Login to your account";
+const releaseTimeContainer = document.querySelector('.release-time');
+const flashingDot = document.querySelector('.flashing-dot');
+const DEFAULT_TEXT = 'Login to your account';
 
 function timeToNewEpisode() {
   let releaseDate = new Date(2024, 4, 16, 0, 0);
@@ -13,10 +13,10 @@ function timeToNewEpisode() {
 
   releaseTimeContainer.innerHTML = `To release of the next episode remain: <span>${days}</span> days <span>${hours}</span> hours <span>${minutes}</span> minutes <span class="seconds-left">${seconds}</span> seconds`;
 
-  if (flashingDot.style.visibility === "hidden") {
-    flashingDot.style.visibility = "visible";
+  if (flashingDot.style.visibility === 'hidden') {
+    flashingDot.style.visibility = 'visible';
   } else {
-    flashingDot.style.visibility = "hidden";
+    flashingDot.style.visibility = 'hidden';
   }
 
   if (timeToRelease <= 0) {
@@ -29,7 +29,7 @@ let timer = setInterval(timeToNewEpisode, 1000);
 timeToNewEpisode();
 
 function openDialog(text = DEFAULT_TEXT) {
-  let dialog = document.createElement("div");
+  let dialog = document.createElement('div');
   document.body.append(dialog);
   dialog.innerHTML = `
   <div class="dialog_container">
@@ -46,33 +46,33 @@ function openDialog(text = DEFAULT_TEXT) {
 }
 
 function closeDialog() {
-  let dialog = document.querySelector(".dialog_container");
+  let dialog = document.querySelector('.dialog_container');
   dialog.remove();
 }
 
 function onNavigationClick(event) {
-  if (event.target.tagName !== "SPAN") {
+  if (event.target.tagName !== 'SPAN') {
     return;
   }
   const title = event.target;
   const ul = title.nextElementSibling;
   if (ul) {
-    ul.classList.toggle("hidden");
+    ul.classList.toggle('hidden');
   }
 }
 
 function OnSortingItems() {
-  const movieItems = document.querySelector(".movie-items");
-  const movieList = Array.from(document.querySelectorAll(".movie-item"));
+  const movieItems = document.querySelector('.movie-items');
+  const movieList = Array.from(document.querySelectorAll('.movie-item'));
   if (select.selectedIndex === 0) {
     movieList.sort((a, b) => {
       const movieEpisodeA = a
-        .querySelector(".movie-episode span")
-        .textContent.split(" ")
+        .querySelector('.movie-episode span')
+        .textContent.split(' ')
         .slice(-1);
       const movieEpisodeB = b
-        .querySelector(".movie-episode span")
-        .textContent.split(" ")
+        .querySelector('.movie-episode span')
+        .textContent.split(' ')
         .slice(-1);
       return movieEpisodeA - movieEpisodeB;
     });
@@ -81,12 +81,12 @@ function OnSortingItems() {
   if (select.selectedIndex === 1) {
     movieList.sort((a, b) => {
       const movieEpisodeA = a
-        .querySelector(".movie-episode span")
-        .textContent.split(" ")
+        .querySelector('.movie-episode span')
+        .textContent.split(' ')
         .slice(-1);
       const movieEpisodeB = b
-        .querySelector(".movie-episode span")
-        .textContent.split(" ")
+        .querySelector('.movie-episode span')
+        .textContent.split(' ')
         .slice(-1);
       return movieEpisodeB - movieEpisodeA;
     });
@@ -95,10 +95,10 @@ function OnSortingItems() {
   if (select.selectedIndex === 2) {
     movieList.sort((a, b) => {
       const releaseDateA = new Date(
-        a.querySelector(".movie-created span").textContent.split(" ").slice(-1)
+        a.querySelector('.movie-created span').textContent.split(' ').slice(-1)
       );
       const releaseDateB = new Date(
-        b.querySelector(".movie-created span").textContent.split(" ").slice(-1)
+        b.querySelector('.movie-created span').textContent.split(' ').slice(-1)
       );
       return releaseDateA - releaseDateB;
     });
@@ -107,10 +107,10 @@ function OnSortingItems() {
   if (select.selectedIndex === 3) {
     movieList.sort((a, b) => {
       const releaseDateA = new Date(
-        a.querySelector(".movie-created span").textContent.split(" ").slice(-1)
+        a.querySelector('.movie-created span').textContent.split(' ').slice(-1)
       );
       const releaseDateB = new Date(
-        b.querySelector(".movie-created span").textContent.split(" ").slice(-1)
+        b.querySelector('.movie-created span').textContent.split(' ').slice(-1)
       );
       return releaseDateB - releaseDateA;
     });
@@ -124,10 +124,10 @@ function OnSortingItems() {
 
 async function searchItems(event) {
   event.preventDefault();
-  const searchInput = document.querySelector("#search-input");
-  const movieItems = document.querySelector(".movie-items");
+  const searchInput = document.querySelector('#search-input');
+  const movieItems = document.querySelector('.movie-items');
   const phrase = searchInput.value.toLowerCase();
-  movieItems.innerHTML = "";
+  movieItems.innerHTML = '';
   const movieList = await getMovie(id);
   movieList
     .filter((movie) => {
@@ -137,10 +137,10 @@ async function searchItems(event) {
       );
     })
     .forEach((movie) => {
-      const linkMovie = document.createElement("a");
-      linkMovie.classList.add("movie-item");
-      linkMovie.setAttribute("data-id", `${movie.id}`);
-      linkMovie.setAttribute("href", `film.html?id=${movie.id}`);
+      const linkMovie = document.createElement('a');
+      linkMovie.classList.add('movie-item');
+      linkMovie.setAttribute('data-id', `${movie.id}`);
+      linkMovie.setAttribute('href', `film.html?id=${movie.id}`);
       html = `
       <div class="img-container">
       <img src="${getMovieData(movie).src}" class="movie-cover" alt="movie"> 
@@ -163,33 +163,33 @@ async function searchItems(event) {
 
 function toggleTheme() {
   if (toggleThemes.checked) {
-    document.body.classList.add("dark-theme");
+    document.body.classList.add('dark-theme');
   } else {
-    document.body.classList.remove("dark-theme");
+    document.body.classList.remove('dark-theme');
   }
   store(toggleThemes);
   favoriteCountShow();
 }
 
 function OnChangeLayout() {
-  const movieItem = document.querySelectorAll(".movie-item");
-  const movieCrawl = document.querySelectorAll(".movie-crawl");
-  const movieItems = document.querySelector(".movie-items");
+  const movieItem = document.querySelectorAll('.movie-item');
+  const movieCrawl = document.querySelectorAll('.movie-crawl');
+  const movieItems = document.querySelector('.movie-items');
   if (changeLayout.checked) {
-    movieItems.classList.add("active-layout");
+    movieItems.classList.add('active-layout');
     movieItem.forEach((item) => {
-      item.classList.add("active-item");
+      item.classList.add('active-item');
     });
     movieCrawl.forEach((item) => {
-      item.style.display = "block";
+      item.style.display = 'block';
     });
   } else {
-    movieItems.classList.remove("active-layout");
+    movieItems.classList.remove('active-layout');
     movieItem.forEach((item) => {
-      item.classList.remove("active-item");
+      item.classList.remove('active-item');
     });
     movieCrawl.forEach((item) => {
-      item.style.display = "-webkit-box";
+      item.style.display = '-webkit-box';
     });
   }
   store(changeLayout.checked);
