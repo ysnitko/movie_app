@@ -993,5 +993,8 @@ footer {
     font-size: 16px;
   }
 
+  .movie-items {
+    grid-template-columns: repeat(auto-fill, 350px);
+  }
  
 }
