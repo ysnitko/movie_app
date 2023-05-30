@@ -1,14 +1,13 @@
 renderAllMovies();
-
 async function renderAllMovies() {
-  const movieItems = document.querySelector('.movie-items');
+  const movieItems = document.querySelector(".movie-items");
   const movieList = await getMovie(id);
   movieList
     .map((movie) => {
-      const linkMovie = document.createElement('a');
-      linkMovie.classList.add('movie-item');
-      linkMovie.setAttribute('data-id', `${movie.id}`);
-      linkMovie.setAttribute('href', `film.html?id=${movie.id}`);
+      const linkMovie = document.createElement("a");
+      linkMovie.classList.add("movie-item");
+      linkMovie.setAttribute("data-id", `${movie.id}`);
+      linkMovie.setAttribute("href", `film.html?id=${movie.id}`);
       html = `
         <div class="img-container">
         <img src="${getMovieData(movie).src}" class="movie-cover" alt="movie"> 

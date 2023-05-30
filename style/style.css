@@ -317,10 +317,6 @@ h3 {
   font-size: 12px;
 }
 
-.active-item {
-  flex-direction: row;
-}
-
 .movie-info {
   padding: 10px 0px 10px 10px;
 }
@@ -619,9 +615,8 @@ footer {
 }
 
 .character-image {
-  max-width: 30%;
+  max-width: 350px;
   padding: 10px;
-  border: 1px solid var(--clr-secondary);
   object-fit: cover;
   object-position: top;
 }
@@ -630,6 +625,7 @@ footer {
   display: flex;
   width: 100%;
   flex-direction: column;
+  flex: 2;
   padding-left: 10px;
   gap: 4px;
   background: url(../img/mando.svg) no-repeat top right;
@@ -849,7 +845,7 @@ footer {
   color: var(--clr-border-bookmarks);
 }
 
-@media screen and (min-width: 600px) and (max-width: 1200px) {
+@media screen and (min-width: 601px) and (max-width: 1200px) {
   main {
     grid-template-columns: 0.3fr 1fr;
   }
@@ -868,5 +864,117 @@ footer {
 
   .img-container {
     width: auto;
+  }
+
+  .active-item {
+    flex-direction: row;
+  }
+
+  .active-item img {
+    width: auto;
+    height: auto;
+  }
+
+  .movie-rating {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 600px) {
+  .main-container {
+    grid-template-columns: auto;
+  }
+
+  .release-block {
+    display: none;
+  }
+
+  .action-toggle-layout {
+    display: none;
+  }
+
+  .movies-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-navigation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0;
+  }
+
+  .main-navigation li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .favorites {
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .header-content {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .header-elements {
+    gap: 35px;
+  }
+
+  .search-form {
+    width: 100%;
+    order: 3;
+  }
+
+  .favorites-cover {
+    max-width: 25%;
+    margin: 0 auto;
+  }
+
+  .main-navigation li span,
+  .main-navigation li a {
+    background-image: none;
+  }
+
+  .active-layout {
+    grid-template-columns: repeat(auto-fill, 230px);
+  }
+
+  .active-layout .movie-item {
+    flex-direction: column;
+  }
+
+  .movie-header {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .movie-header span {
+    text-align: center;
+  }
+
+  .character-about {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .character-image {
+    max-width: 70%;
+    margin: 0 auto;
+  }
+
+  .character-description {
+    background: url(../img/mando.svg) no-repeat center;
+  }
+
+  .characters-container {
+    justify-content: space-evenly;
   }
 }
