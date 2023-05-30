@@ -617,6 +617,7 @@ footer {
 .character-image {
   max-width: 40%;
   padding: 10px;
+  aspect-ratio: 16 / 9;
   object-fit: contain;
   object-position: top;
 }
@@ -855,6 +856,7 @@ footer {
   }
 
   .movie-items {
+    gap: 10px;
     justify-content: space-evenly;
   }
 
