@@ -1,12 +1,12 @@
+const characterID = searchParams.get("character") || 0;
+
 renderCharacterAbout();
 
 async function renderCharacterAbout() {
   const characterInfo = await getCharacterInfo(characterID);
-  const movieContainer = document.querySelector(".movies-container");
+  const movieContainer = document.querySelector(".movies-cont");
   const html = `<div class="character-about">
-             
                     <img class="character-image" src="${characterInfo.image}" alt="">
-             
                     <div class="character-description">
                       <p class="character-name">${characterInfo.name}</p>
                       <span>About character</span>
@@ -23,11 +23,11 @@ async function renderCharacterAbout() {
                     </div>
                     <p class="character-wiki">Wiki: <a href="${characterInfo.wiki}" target="_blank">${characterInfo.wiki}</a></p>
                   </div>
-                 
                   </div>`;
   movieContainer.innerHTML = html;
   showCharactersFilmsLinks();
   toggleTheme();
+  menuState();
 }
 
 async function showCharactersFilmsLinks() {

@@ -1,15 +1,9 @@
-const select = document.querySelector("#sorting");
-const toggleThemes = document.querySelector("#checkbox");
-const changeLayout = document.querySelector(".layouts");
 const searchParams = new URLSearchParams(location.search);
 let id = searchParams.get("id") || "all";
-const characterID = searchParams.get("character") || 0;
-
-toggleThemes.checked = restore().themes || false;
-select.selectedIndex = restore().selected || 0;
-changeLayout.checked = restore().layout || false;
-let favoriteItems = restore().favoritesItem || [];
 let charactersAll = [];
+let dataStorage = restore();
+let favoriteItems = dataStorage.favorItem || [];
+let state = restoreMenu();
 
 async function getMovie(id) {
   const response = await fetch(
@@ -42,18 +36,24 @@ function getMovieData(data) {
   return MOVIE_INFO.find((cover) => cover.id === data.id);
 }
 
-function store(favoriteItems) {
-  localStorage.setItem(
-    "dataStorage",
-    JSON.stringify({
-      selected: select.selectedIndex,
-      themes: toggleThemes.checked,
-      layout: changeLayout.checked,
-      favoritesItem: Array.from(favoriteItems),
-    })
-  );
+function store() {
+  localStorage.setItem("dataStorage", JSON.stringify(dataStorage));
+}
+
+function favoriteCountShow() {
+  const favoriteCount = document.querySelector(".favorites-items");
+  favoriteCount.textContent = `${favoriteItems.length}`;
+  // store(favoriteItems);
 }
 
 function restore() {
-  return JSON.parse(localStorage.getItem("dataStorage")) || [];
+  return JSON.parse(localStorage.getItem("dataStorage")) || {};
+}
+
+function storeMenu() {
+  localStorage.setItem("state", state);
+}
+
+function restoreMenu() {
+  return localStorage.getItem("state") || "closed";
 }

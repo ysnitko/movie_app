@@ -1,35 +1,10 @@
-const releaseTimeContainer = document.querySelector('.release-time');
-const flashingDot = document.querySelector('.flashing-dot');
-const DEFAULT_TEXT = 'Login to your account';
+const DEFAULT_TEXT = "Login to your account";
+const toggleThemes = document.querySelector("#checkbox");
 
-function timeToNewEpisode() {
-  let releaseDate = new Date(2024, 4, 16, 0, 0);
-  let currentDate = new Date();
-  let timeToRelease = (releaseDate - currentDate) / 1000;
-  let days = Math.floor(timeToRelease / 86400);
-  let hours = Math.floor((timeToRelease % 86400) / 3600);
-  let minutes = Math.floor((timeToRelease % 3600) / 60);
-  let seconds = Math.floor(timeToRelease % 60);
-
-  releaseTimeContainer.innerHTML = `To release of the next episode remain: <span>${days}</span> days <span>${hours}</span> hours <span>${minutes}</span> minutes <span class="seconds-left">${seconds}</span> seconds`;
-
-  if (flashingDot.style.visibility === 'hidden') {
-    flashingDot.style.visibility = 'visible';
-  } else {
-    flashingDot.style.visibility = 'hidden';
-  }
-
-  if (timeToRelease <= 0) {
-    clearInterval(timer);
-    releaseTimeContainer.textContent = `before the next episode remain`;
-  }
-}
-
-let timer = setInterval(timeToNewEpisode, 1000);
-timeToNewEpisode();
+toggleThemes.checked = dataStorage.toggle || false;
 
 function openDialog(text = DEFAULT_TEXT) {
-  let dialog = document.createElement('div');
+  let dialog = document.createElement("div");
   document.body.append(dialog);
   dialog.innerHTML = `
   <div class="dialog_container">
@@ -46,88 +21,46 @@ function openDialog(text = DEFAULT_TEXT) {
 }
 
 function closeDialog() {
-  let dialog = document.querySelector('.dialog_container');
+  let dialog = document.querySelector(".dialog_container");
   dialog.remove();
 }
 
 function onNavigationClick(event) {
-  if (event.target.tagName !== 'SPAN') {
+  if (event.target.tagName !== "SPAN") {
     return;
   }
   const title = event.target;
   const ul = title.nextElementSibling;
   if (ul) {
-    ul.classList.toggle('hidden');
+    ul.classList.toggle("hidden");
+  }
+  if (ul.classList.contains("hidden")) {
+    state = "closed";
+    storeMenu();
+  } else {
+    state = "open";
+    storeMenu();
   }
 }
 
-function OnSortingItems() {
-  const movieItems = document.querySelector('.movie-items');
-  const movieList = Array.from(document.querySelectorAll('.movie-item'));
-  if (select.selectedIndex === 0) {
-    movieList.sort((a, b) => {
-      const movieEpisodeA = a
-        .querySelector('.movie-episode span')
-        .textContent.split(' ')
-        .slice(-1);
-      const movieEpisodeB = b
-        .querySelector('.movie-episode span')
-        .textContent.split(' ')
-        .slice(-1);
-      return movieEpisodeA - movieEpisodeB;
-    });
+function menuState() {
+  const ul = document.querySelector(".main-navigation .favorites");
+  if (state === "open") {
+    ul.classList.remove("hidden");
+  } else if (state === "closed") {
+    ul.classList.add("hidden");
   }
-
-  if (select.selectedIndex === 1) {
-    movieList.sort((a, b) => {
-      const movieEpisodeA = a
-        .querySelector('.movie-episode span')
-        .textContent.split(' ')
-        .slice(-1);
-      const movieEpisodeB = b
-        .querySelector('.movie-episode span')
-        .textContent.split(' ')
-        .slice(-1);
-      return movieEpisodeB - movieEpisodeA;
-    });
-  }
-
-  if (select.selectedIndex === 2) {
-    movieList.sort((a, b) => {
-      const releaseDateA = new Date(
-        a.querySelector('.movie-created span').textContent.split(' ').slice(-1)
-      );
-      const releaseDateB = new Date(
-        b.querySelector('.movie-created span').textContent.split(' ').slice(-1)
-      );
-      return releaseDateA - releaseDateB;
-    });
-  }
-
-  if (select.selectedIndex === 3) {
-    movieList.sort((a, b) => {
-      const releaseDateA = new Date(
-        a.querySelector('.movie-created span').textContent.split(' ').slice(-1)
-      );
-      const releaseDateB = new Date(
-        b.querySelector('.movie-created span').textContent.split(' ').slice(-1)
-      );
-      return releaseDateB - releaseDateA;
-    });
-  }
-  store(select.selectedIndex);
-  favoriteCountShow();
-  movieList.forEach((movie) => {
-    movieItems.append(movie);
-  });
+  storeMenu();
 }
+
+menuState();
 
 async function searchItems(event) {
   event.preventDefault();
-  const searchInput = document.querySelector('#search-input');
-  const movieItems = document.querySelector('.movie-items');
+  const searchInput = document.querySelector("#search-input");
+  const movieItems = document.querySelector(".movie-items");
   const phrase = searchInput.value.toLowerCase();
-  movieItems.innerHTML = '';
+  movieItems.innerHTML = "";
   const movieList = await getMovie(id);
   movieList
     .filter((movie) => {
@@ -137,10 +70,10 @@ async function searchItems(event) {
       );
     })
     .forEach((movie) => {
-      const linkMovie = document.createElement('a');
-      linkMovie.classList.add('movie-item');
-      linkMovie.setAttribute('data-id', `${movie.id}`);
-      linkMovie.setAttribute('href', `film.html?id=${movie.id}`);
+      const linkMovie = document.createElement("a");
+      linkMovie.classList.add("movie-item");
+      linkMovie.setAttribute("data-id", `${movie.id}`);
+      linkMovie.setAttribute("href", `film.html?id=${movie.id}`);
       html = `
       <div class="img-container">
       <img src="${getMovieData(movie).src}" class="movie-cover" alt="movie"> 
@@ -163,35 +96,13 @@ async function searchItems(event) {
 
 function toggleTheme() {
   if (toggleThemes.checked) {
-    document.body.classList.add('dark-theme');
+    document.body.classList.add("dark-theme");
   } else {
-    document.body.classList.remove('dark-theme');
+    document.body.classList.remove("dark-theme");
   }
-  store(toggleThemes);
+  dataStorage.toggle = toggleThemes.checked;
+  store();
   favoriteCountShow();
 }
 
-function OnChangeLayout() {
-  const movieItem = document.querySelectorAll('.movie-item');
-  const movieCrawl = document.querySelectorAll('.movie-crawl');
-  const movieItems = document.querySelector('.movie-items');
-  if (changeLayout.checked) {
-    movieItems.classList.add('active-layout');
-    movieItem.forEach((item) => {
-      item.classList.add('active-item');
-    });
-    movieCrawl.forEach((item) => {
-      item.style.display = 'block';
-    });
-  } else {
-    movieItems.classList.remove('active-layout');
-    movieItem.forEach((item) => {
-      item.classList.remove('active-item');
-    });
-    movieCrawl.forEach((item) => {
-      item.style.display = '-webkit-box';
-    });
-  }
-  store(changeLayout.checked);
-  favoriteCountShow();
-}
+toggleTheme();

@@ -11,6 +11,11 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="shortcut icon"
+      href="./img/mando-favicon.svg"
+      type="image/x-icon"
+    />
     <link rel="stylesheet" href="./style/style.css" />
   </head>
   <body>
@@ -51,19 +56,6 @@
               <a href="./index.html">Main</a>
             </li>
             <li>
-              <span>Categories</span>
-              <ul class="categories-items hidden">
-                <li><a href="#">Action #</a></li>
-                <li><a href="#">Comedy #</a></li>
-                <li><a href="#">Horror #</a></li>
-                <li><a href="#">Drama #</a></li>
-                <li><a href="#">Romance #</a></li>
-                <li><a href="#">Thriller #</a></li>
-                <li><a href="#">Mystery #</a></li>
-                <li><a href="#">Fantasy #</a></li>
-              </ul>
-            </li>
-            <li>
               <span class="favorites-category">
                 Favorites <span class="favorites-items"></span
               ></span>
@@ -71,48 +63,7 @@
             </li>
           </ul>
         </div>
-        <div class="movies-container">
-          <div class="movies-container-header">
-            <h3>Star Wars movies</h3>
-            <div class="release-block">
-              <img class="flashing-dot" src="./img/dot.svg" alt="" />
-              <p class="release-time"></p>
-            </div>
-          </div>
-          <div class="action-on-movies">
-            <div class="action-sorting">
-              <span>Sort by:</span>
-              <select name="sort" id="sorting" onchange="OnSortingItems()">
-                <option value="1">Episode (0-9)</option>
-                <option value="2">Episode (9-0)</option>
-                <option value="5">Release date (Oldest)</option>
-                <option value="6">Release date (Newest)</option>
-              </select>
-            </div>
-            <div class="action-toggle-layout">
-              <label class="layout row">
-                <input
-                  type="radio"
-                  class="layouts"
-                  name="changeLayout"
-                  onchange="OnChangeLayout()"
-                />
-                <span class="checkmark"></span>
-              </label>
-              <label class="layout tile">
-                <input
-                  type="radio"
-                  class="layouts"
-                  name="changeLayout"
-                  onchange="OnChangeLayout()"
-                  checked
-                />
-                <span class="checkmark"></span>
-              </label>
-            </div>
-          </div>
-          <div class="movie-items"></div>
-        </div>
+        <div class="movies-cont"></div>
       </main>
       <footer>
         <ul class="social-links">
