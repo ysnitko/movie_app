@@ -626,7 +626,6 @@ footer {
   display: flex;
   width: 100%;
   flex-direction: column;
-  flex: 2;
   padding-left: 10px;
   gap: 4px;
   background: url(../img/mando.svg) no-repeat top right;
@@ -881,8 +880,13 @@ footer {
     display: none;
   }
 
+  .movie-header > span {
+    font-size: 22px
+  }
+
   .character-about {
-  
+    padding-inline: 10px;
+    gap: 0;
   }
 }
 
@@ -967,6 +971,7 @@ footer {
 
   .movie-header span {
     text-align: center;
+    font-size: 22px;
   }
 
   .character-about {
