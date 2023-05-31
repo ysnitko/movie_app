@@ -880,6 +880,10 @@ footer {
   .movie-rating {
     display: none;
   }
+
+  .character-about {
+  
+  }
 }
 
 @media screen and (min-width: 320px) and (max-width: 600px) {
@@ -958,7 +962,7 @@ footer {
   .movie-header {
     justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 20px;
   }
 
   .movie-header span {
@@ -971,11 +975,14 @@ footer {
   }
 
   .character-image {
-    max-width: 70%;
+    max-width: 80%;
+    padding: 0;
     margin: 0 auto;
+    aspect-ratio: inherit;
   }
 
   .character-description {
+    align-items: center;
     background: url(../img/mando.svg) no-repeat center;
   }
 
@@ -997,5 +1004,21 @@ footer {
 
   .movie-items {
     grid-template-columns: repeat(auto-fill, 320px);
+  }
+
+  .character-films {
+    flex-direction: column;
+  }
+
+  .character-films-featuring {
+    align-items: center;
+  }
+
+  .character-films > span {
+    text-align: center;
+  }
+
+  .movie-additional-info {
+    padding-inline: 0;
   }
 }

@@ -1,5 +1,5 @@
 const searchParams = new URLSearchParams(location.search);
-let id = searchParams.get("id") || "all";
+let id = searchParams.get('id') || 'all';
 let charactersAll = [];
 let dataStorage = restore();
 let favoriteItems = dataStorage.favorItem || [];
@@ -22,7 +22,7 @@ async function getCharacterInfo(characterID) {
 }
 
 async function getCharactersList() {
-  const character = await getCharacterInfo("all");
+  const character = await getCharacterInfo('all');
   const movie = await getMovie(id);
   if (charactersAll.length === 0) {
     movie.characters.map((item) => {
@@ -36,24 +36,23 @@ function getMovieData(data) {
   return MOVIE_INFO.find((cover) => cover.id === data.id);
 }
 
-function store() {
-  localStorage.setItem("dataStorage", JSON.stringify(dataStorage));
+function favoriteCountShow() {
+  const favoriteCount = document.querySelector('.favorites-items');
+  favoriteCount.textContent = `${favoriteItems.length}`;
 }
 
-function favoriteCountShow() {
-  const favoriteCount = document.querySelector(".favorites-items");
-  favoriteCount.textContent = `${favoriteItems.length}`;
-  // store(favoriteItems);
+function store() {
+  localStorage.setItem('dataStorage', JSON.stringify(dataStorage));
 }
 
 function restore() {
-  return JSON.parse(localStorage.getItem("dataStorage")) || {};
+  return JSON.parse(localStorage.getItem('dataStorage')) || {};
 }
 
 function storeMenu() {
-  localStorage.setItem("state", state);
+  localStorage.setItem('state', state);
 }
 
 function restoreMenu() {
-  return localStorage.getItem("state") || "closed";
+  return localStorage.getItem('state') || 'closed';
 }

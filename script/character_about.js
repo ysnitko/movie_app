@@ -1,10 +1,10 @@
-const characterID = searchParams.get("character") || 0;
+const characterID = searchParams.get('character') || 0;
 
 renderCharacterAbout();
 
 async function renderCharacterAbout() {
   const characterInfo = await getCharacterInfo(characterID);
-  const movieContainer = document.querySelector(".movies-cont");
+  const movieContainer = document.querySelector('.movies-cont');
   const html = `<div class="character-about">
                     <img class="character-image" src="${characterInfo.image}" alt="">
                     <div class="character-description">
@@ -31,15 +31,15 @@ async function renderCharacterAbout() {
 }
 
 async function showCharactersFilmsLinks() {
-  const characterFilms = document.querySelector(".character-films-featuring");
+  const characterFilms = document.querySelector('.character-films-featuring');
   const characterInfo = await getCharacterInfo(characterID);
   let links = characterInfo.films;
   let movie = await getMovie(id);
   movie
     .filter((link) => links.includes(link.id.toString()))
     .map((link) => {
-      const links = document.createElement("a");
-      links.setAttribute("href", `film.html?id=${link.id}`);
+      const links = document.createElement('a');
+      links.setAttribute('href', `film.html?id=${link.id}`);
       links.textContent = `${link.title}`;
       characterFilms.append(links);
     });

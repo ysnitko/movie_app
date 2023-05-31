@@ -1,18 +1,18 @@
-const select = document.querySelector("#sorting");
-const changeLayout = document.querySelector(".layouts");
+const select = document.querySelector('#sorting');
+const changeLayout = document.querySelector('.layouts');
 changeLayout.checked = dataStorage.layout || false;
 select.selectedIndex = dataStorage.selected || 0;
 renderAllMovies();
 
 async function renderAllMovies() {
-  const movieItems = document.querySelector(".movie-items");
+  const movieItems = document.querySelector('.movie-items');
   const movieList = await getMovie(id);
   movieList
     .map((movie) => {
-      const linkMovie = document.createElement("a");
-      linkMovie.classList.add("movie-item");
-      linkMovie.setAttribute("data-id", `${movie.id}`);
-      linkMovie.setAttribute("href", `film.html?id=${movie.id}`);
+      const linkMovie = document.createElement('a');
+      linkMovie.classList.add('movie-item');
+      linkMovie.setAttribute('data-id', `${movie.id}`);
+      linkMovie.setAttribute('href', `film.html?id=${movie.id}`);
       html = `
         <div class="img-container">
         <img src="${getMovieData(movie).src}" class="movie-cover" alt=""> 
@@ -39,17 +39,17 @@ async function renderAllMovies() {
 }
 
 function OnSortingItems() {
-  const movieItems = document.querySelector(".movie-items");
-  const movieList = Array.from(document.querySelectorAll(".movie-item"));
+  const movieItems = document.querySelector('.movie-items');
+  const movieList = Array.from(document.querySelectorAll('.movie-item'));
   if (select.selectedIndex === 0) {
     movieList.sort((a, b) => {
       const movieEpisodeA = a
-        .querySelector(".movie-episode span")
-        .textContent.split(" ")
+        .querySelector('.movie-episode span')
+        .textContent.split(' ')
         .slice(-1);
       const movieEpisodeB = b
-        .querySelector(".movie-episode span")
-        .textContent.split(" ")
+        .querySelector('.movie-episode span')
+        .textContent.split(' ')
         .slice(-1);
       return movieEpisodeA - movieEpisodeB;
     });
@@ -58,12 +58,12 @@ function OnSortingItems() {
   if (select.selectedIndex === 1) {
     movieList.sort((a, b) => {
       const movieEpisodeA = a
-        .querySelector(".movie-episode span")
-        .textContent.split(" ")
+        .querySelector('.movie-episode span')
+        .textContent.split(' ')
         .slice(-1);
       const movieEpisodeB = b
-        .querySelector(".movie-episode span")
-        .textContent.split(" ")
+        .querySelector('.movie-episode span')
+        .textContent.split(' ')
         .slice(-1);
       return movieEpisodeB - movieEpisodeA;
     });
@@ -72,10 +72,10 @@ function OnSortingItems() {
   if (select.selectedIndex === 2) {
     movieList.sort((a, b) => {
       const releaseDateA = new Date(
-        a.querySelector(".movie-created span").textContent.split(" ").slice(-1)
+        a.querySelector('.movie-created span').textContent.split(' ').slice(-1)
       );
       const releaseDateB = new Date(
-        b.querySelector(".movie-created span").textContent.split(" ").slice(-1)
+        b.querySelector('.movie-created span').textContent.split(' ').slice(-1)
       );
       return releaseDateA - releaseDateB;
     });
@@ -84,10 +84,10 @@ function OnSortingItems() {
   if (select.selectedIndex === 3) {
     movieList.sort((a, b) => {
       const releaseDateA = new Date(
-        a.querySelector(".movie-created span").textContent.split(" ").slice(-1)
+        a.querySelector('.movie-created span').textContent.split(' ').slice(-1)
       );
       const releaseDateB = new Date(
-        b.querySelector(".movie-created span").textContent.split(" ").slice(-1)
+        b.querySelector('.movie-created span').textContent.split(' ').slice(-1)
       );
       return releaseDateB - releaseDateA;
     });
@@ -102,8 +102,8 @@ function OnSortingItems() {
 }
 
 function timeToNewEpisode() {
-  const releaseTimeContainer = document.querySelector(".release-time");
-  const flashingDot = document.querySelector(".flashing-dot");
+  const releaseTimeContainer = document.querySelector('.release-time');
+  const flashingDot = document.querySelector('.flashing-dot');
   let releaseDate = new Date(2024, 4, 16, 0, 0);
   let currentDate = new Date();
   let timeToRelease = (releaseDate - currentDate) / 1000;
@@ -114,10 +114,10 @@ function timeToNewEpisode() {
 
   releaseTimeContainer.innerHTML = `To release of the next episode remain: <span>${days}</span> days <span>${hours}</span> hours <span>${minutes}</span> minutes <span class="seconds-left">${seconds}</span> seconds`;
 
-  if (flashingDot.style.visibility === "hidden") {
-    flashingDot.style.visibility = "visible";
+  if (flashingDot.style.visibility === 'hidden') {
+    flashingDot.style.visibility = 'visible';
   } else {
-    flashingDot.style.visibility = "hidden";
+    flashingDot.style.visibility = 'hidden';
   }
 
   if (timeToRelease <= 0) {
@@ -130,24 +130,24 @@ let timer = setInterval(timeToNewEpisode, 1000);
 timeToNewEpisode();
 
 function OnChangeLayout() {
-  const movieItem = document.querySelectorAll(".movie-item");
-  const movieCrawl = document.querySelectorAll(".movie-crawl");
-  const movieItems = document.querySelector(".movie-items");
+  const movieItem = document.querySelectorAll('.movie-item');
+  const movieCrawl = document.querySelectorAll('.movie-crawl');
+  const movieItems = document.querySelector('.movie-items');
   if (changeLayout.checked) {
-    movieItems.classList.add("active-layout");
+    movieItems.classList.add('active-layout');
     movieItem.forEach((item) => {
-      item.classList.add("active-item");
+      item.classList.add('active-item');
     });
     movieCrawl.forEach((item) => {
-      item.style.display = "block";
+      item.style.display = 'block';
     });
   } else {
-    movieItems.classList.remove("active-layout");
+    movieItems.classList.remove('active-layout');
     movieItem.forEach((item) => {
-      item.classList.remove("active-item");
+      item.classList.remove('active-item');
     });
     movieCrawl.forEach((item) => {
-      item.style.display = "-webkit-box";
+      item.style.display = '-webkit-box';
     });
   }
   dataStorage.layout = changeLayout.checked;
