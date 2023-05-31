@@ -23,6 +23,7 @@ async function renderCharacterAbout() {
                     </div>
                     <p class="character-wiki">Wiki: <a href="${characterInfo.wiki}" target="_blank">${characterInfo.wiki}</a></p>
                   </div>
+                  
                   </div>`;
   movieContainer.innerHTML = html;
   showCharactersFilmsLinks();

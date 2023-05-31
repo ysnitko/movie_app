@@ -849,6 +849,10 @@ footer {
     grid-template-columns: 0.2fr 1fr;
   }
 
+  .movies-container {
+    padding-left: 0;
+  }
+
   .release-block {
     display: none;
   }
@@ -976,6 +980,7 @@ footer {
   .character-about {
     flex-direction: column;
     align-items: center;
+    margin-bottom: 15px;
   }
 
   .character-image {
@@ -987,6 +992,7 @@ footer {
 
   .character-description {
     align-items: center;
+    padding: 0;
     background: url(../img/mando.svg) no-repeat center;
   }
 
@@ -1024,5 +1030,9 @@ footer {
 
   .movie-additional-info {
     padding-inline: 0;
+  }
+
+  .character-wiki {
+    text-align: center;
   }
 }
