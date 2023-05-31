@@ -611,11 +611,13 @@ footer {
 .character-about {
   display: flex;
   justify-content: space-between;
+  padding: 15px;
   gap: 15px;
 }
 
 .character-image {
-  max-width: 40%;
+  max-width: 350px;
+  max-height: 100%;
   aspect-ratio: 16 / 9;
   object-fit: contain;
   object-position: top;
@@ -890,6 +892,15 @@ footer {
   .character-about {
     padding: 15px 10px;
     gap: 0;
+  }
+
+  .character-image {
+    width: auto;
+    max-width: 40%;
+    max-height: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+    object-position: top;
   }
 }
 
