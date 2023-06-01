@@ -8,6 +8,7 @@ renderAllMovies();
 async function renderAllMovies() {
   const movieItems = document.querySelector('.movie-items');
   const movieList = await getMovie(id);
+  const elements = document.querySelectorAll('*');
   movieList
     .map((movie) => {
       const linkMovie = document.createElement('a');
@@ -35,22 +36,11 @@ async function renderAllMovies() {
     })
     .forEach((movie) => {
       movieItems.append(movie);
-      skeleton();
     });
-
   OnSortingItems();
   OnChangeLayout();
   toggleTheme();
   menuState();
-}
-
-function skeleton() {
-  const allSkeleton = document.querySelectorAll('.skeleton');
-  window.addEventListener('load', function () {
-    allSkeleton.forEach((item) => {
-      item.classList.remove('skeleton');
-    });
-  });
 }
 
 function OnSortingItems() {

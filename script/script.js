@@ -1,6 +1,5 @@
 const DEFAULT_TEXT = 'Login to your account';
 const toggleThemes = document.querySelector('#checkbox');
-
 toggleThemes.checked = dataStorage.toggle || false;
 
 function openDialog(text = DEFAULT_TEXT) {
@@ -107,9 +106,9 @@ function toggleTheme() {
 
 toggleTheme();
 
-function skeleton() {
+function skeleton(skeletonClass) {
   const allSkeleton = document.querySelectorAll('.skeleton');
   allSkeleton.forEach((item) => {
-    item.classList.remove('skeleton');
+    item.classList.remove(skeletonClass);
   });
 }
