@@ -2,6 +2,7 @@ const select = document.querySelector('#sorting');
 const changeLayout = document.querySelector('.layouts');
 changeLayout.checked = dataStorage.layout || false;
 select.selectedIndex = dataStorage.selected || 0;
+
 renderAllMovies();
 
 async function renderAllMovies() {
@@ -14,27 +15,42 @@ async function renderAllMovies() {
       linkMovie.setAttribute('data-id', `${movie.id}`);
       linkMovie.setAttribute('href', `film.html?id=${movie.id}`);
       html = `
-        <div class="img-container">
+        <div class="img-container skeleton">
         <img src="${getMovieData(movie).src}" class="movie-cover" alt="">  
         </div>
         <div class="movie-info">
-          <div class="movie-title"><span>${movie.title}</span></div>
-          <div class="movie-crawl"><span>${movie.opening_crawl}</span></div>
-          <div><span class="movie-created">Release date: ${
+          <div class="movie-title skeleton"><span>${movie.title}</span></div>
+          <div class="movie-crawl skeleton"><span>${
+            movie.opening_crawl
+          }</span></div>
+          <div><span class="movie-created skeleton">Release date: ${
             movie.release_date
           }</span></div>
-          <div class="movie-episode"><span class="episode-num">Episode: ${
+          <div class="movie-episode skeleton"><span class="episode-num">Episode: ${
             movie.episode_id
           }</span></div>
         </div>`;
       linkMovie.innerHTML = html;
       return linkMovie;
     })
-    .forEach((movie) => movieItems.append(movie));
+    .forEach((movie) => {
+      movieItems.append(movie);
+      skeleton();
+    });
+
   OnSortingItems();
   OnChangeLayout();
   toggleTheme();
   menuState();
+}
+
+function skeleton() {
+  const allSkeleton = document.querySelectorAll('.skeleton');
+  window.addEventListener('load', function () {
+    allSkeleton.forEach((item) => {
+      item.classList.remove('skeleton');
+    });
+  });
 }
 
 function OnSortingItems() {
@@ -121,6 +137,7 @@ function timeToNewEpisode() {
 
   if (timeToRelease <= 0) {
     clearInterval(timer);
+    releaseTimeContainer.textContent = `before the next episode remain`;
   }
 }
 

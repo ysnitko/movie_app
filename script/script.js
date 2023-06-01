@@ -106,3 +106,10 @@ function toggleTheme() {
 }
 
 toggleTheme();
+
+function skeleton() {
+  const allSkeleton = document.querySelectorAll('.skeleton');
+  allSkeleton.forEach((item) => {
+    item.classList.remove('skeleton');
+  });
+}
