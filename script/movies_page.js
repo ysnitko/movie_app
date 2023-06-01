@@ -8,7 +8,6 @@ renderAllMovies();
 async function renderAllMovies() {
   const movieItems = document.querySelector('.movie-items');
   const movieList = await getMovie(id);
-  const elements = document.querySelectorAll('*');
   movieList
     .map((movie) => {
       const linkMovie = document.createElement('a');
@@ -37,6 +36,7 @@ async function renderAllMovies() {
     .forEach((movie) => {
       movieItems.append(movie);
     });
+  skeleton('skeleton');
   OnSortingItems();
   OnChangeLayout();
   toggleTheme();
