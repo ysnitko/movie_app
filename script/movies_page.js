@@ -15,16 +15,15 @@ async function renderAllMovies() {
       linkMovie.setAttribute('href', `film.html?id=${movie.id}`);
       html = `
         <div class="img-container">
-        <img src="${getMovieData(movie).src}" class="movie-cover" alt=""> 
-        <span class="movie-rating">${getMovieData(movie).rating}</span> 
+        <img src="${getMovieData(movie).src}" class="movie-cover" alt="">  
         </div>
         <div class="movie-info">
           <div class="movie-title"><span>${movie.title}</span></div>
           <div class="movie-crawl"><span>${movie.opening_crawl}</span></div>
-          <div class="movie-created"><span>Release date: ${
+          <div><span class="movie-created">Release date: ${
             movie.release_date
           }</span></div>
-          <div class="movie-episode"><span>Episode: ${
+          <div class="movie-episode"><span class="episode-num">Episode: ${
             movie.episode_id
           }</span></div>
         </div>`;
@@ -44,11 +43,11 @@ function OnSortingItems() {
   if (select.selectedIndex === 0) {
     movieList.sort((a, b) => {
       const movieEpisodeA = a
-        .querySelector('.movie-episode span')
+        .querySelector('.episode-num')
         .textContent.split(' ')
         .slice(-1);
       const movieEpisodeB = b
-        .querySelector('.movie-episode span')
+        .querySelector('.episode-num')
         .textContent.split(' ')
         .slice(-1);
       return movieEpisodeA - movieEpisodeB;
@@ -58,11 +57,11 @@ function OnSortingItems() {
   if (select.selectedIndex === 1) {
     movieList.sort((a, b) => {
       const movieEpisodeA = a
-        .querySelector('.movie-episode span')
+        .querySelector('.episode-num')
         .textContent.split(' ')
         .slice(-1);
       const movieEpisodeB = b
-        .querySelector('.movie-episode span')
+        .querySelector('.episode-num')
         .textContent.split(' ')
         .slice(-1);
       return movieEpisodeB - movieEpisodeA;
@@ -72,10 +71,10 @@ function OnSortingItems() {
   if (select.selectedIndex === 2) {
     movieList.sort((a, b) => {
       const releaseDateA = new Date(
-        a.querySelector('.movie-created span').textContent.split(' ').slice(-1)
+        a.querySelector('.movie-created').textContent.split(' ').slice(-1)
       );
       const releaseDateB = new Date(
-        b.querySelector('.movie-created span').textContent.split(' ').slice(-1)
+        b.querySelector('.movie-created').textContent.split(' ').slice(-1)
       );
       return releaseDateA - releaseDateB;
     });
@@ -84,10 +83,10 @@ function OnSortingItems() {
   if (select.selectedIndex === 3) {
     movieList.sort((a, b) => {
       const releaseDateA = new Date(
-        a.querySelector('.movie-created span').textContent.split(' ').slice(-1)
+        a.querySelector('.movie-created').textContent.split(' ').slice(-1)
       );
       const releaseDateB = new Date(
-        b.querySelector('.movie-created span').textContent.split(' ').slice(-1)
+        b.querySelector('.movie-created').textContent.split(' ').slice(-1)
       );
       return releaseDateB - releaseDateA;
     });
@@ -122,7 +121,6 @@ function timeToNewEpisode() {
 
   if (timeToRelease <= 0) {
     clearInterval(timer);
-    releaseTimeContainer.textContent = `before the next episode remain`;
   }
 }
 

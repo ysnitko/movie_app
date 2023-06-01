@@ -586,7 +586,7 @@ footer {
   font-size: 12px;
 }
 
-.character-link img {
+.character-cover {
   width: 100%;
   aspect-ratio: 1;
   border-radius: 15%;
@@ -886,7 +886,7 @@ footer {
   }
 
   .movie-header > span {
-    font-size: 22px
+    font-size: 22px;
   }
 
   .character-about {
