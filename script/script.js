@@ -1,9 +1,9 @@
-const DEFAULT_TEXT = 'Login to your account';
-const toggleThemes = document.querySelector('#checkbox');
+const DEFAULT_TEXT = "Login to your account";
+const toggleThemes = document.querySelector("#checkbox");
 toggleThemes.checked = dataStorage.toggle || false;
 
 function openDialog(text = DEFAULT_TEXT) {
-  let dialog = document.createElement('div');
+  let dialog = document.createElement("div");
   document.body.append(dialog);
   dialog.innerHTML = `
   <div class="dialog_container">
@@ -11,43 +11,53 @@ function openDialog(text = DEFAULT_TEXT) {
   <button class="x_button" onclick="closeDialog()">x</button>
     <p class="small_text">${text}</p>
     <input type="email" id="dialogInput" name="login" required placeholder="E-mail">
-    <input type="password" name="password" placeholder="Password">
-    <button class="confirm-button" type="submit">Login</button>
+    <input  id="pass-field" type="password" name="password" placeholder="Password">
+    <button class="confirm-button" type="submit" onclick="validate(event)">Login</button>
     <a href="#" class="forgot-password">Forgot your password?</a>
   </form>
   </div>
   `;
 }
 
+function validate(event) {
+  const passwordField = document.querySelector("#pass-field");
+  const passLength = passwordField.value.length;
+  if (passLength === 0) {
+    event.preventDefault();
+    passwordField.classList.add("pass-validate");
+    passwordField.setAttribute("placeholder", "Enter correct password");
+  }
+}
+
 function closeDialog() {
-  let dialog = document.querySelector('.dialog_container');
+  let dialog = document.querySelector(".dialog_container");
   dialog.remove();
 }
 
 function onNavigationClick(event) {
-  if (event.target.tagName !== 'SPAN') {
+  if (event.target.tagName !== "SPAN") {
     return;
   }
   const title = event.target;
   const ul = title.nextElementSibling;
   if (ul) {
-    ul.classList.toggle('hidden');
+    ul.classList.toggle("hidden");
   }
-  if (ul.classList.contains('hidden')) {
-    state = 'closed';
+  if (ul.classList.contains("hidden")) {
+    state = "closed";
     storeMenu();
   } else {
-    state = 'open';
+    state = "open";
     storeMenu();
   }
 }
 
 function menuState() {
-  const ul = document.querySelector('.main-navigation .favorites');
-  if (state === 'open') {
-    ul.classList.remove('hidden');
-  } else if (state === 'closed') {
-    ul.classList.add('hidden');
+  const ul = document.querySelector(".main-navigation .favorites");
+  if (state === "open") {
+    ul.classList.remove("hidden");
+  } else if (state === "closed") {
+    ul.classList.add("hidden");
   }
   storeMenu();
 }
@@ -56,10 +66,10 @@ menuState();
 
 async function searchItems(event) {
   event.preventDefault();
-  const searchInput = document.querySelector('#search-input');
-  const movieItems = document.querySelector('.movie-items');
+  const searchInput = document.querySelector("#search-input");
+  const movieItems = document.querySelector(".movie-items");
   const phrase = searchInput.value.toLowerCase();
-  movieItems.innerHTML = '';
+  movieItems.innerHTML = "";
   const movieList = await getMovie(id);
   movieList
     .filter((movie) => {
@@ -69,10 +79,10 @@ async function searchItems(event) {
       );
     })
     .forEach((movie) => {
-      const linkMovie = document.createElement('a');
-      linkMovie.classList.add('movie-item');
-      linkMovie.setAttribute('data-id', `${movie.id}`);
-      linkMovie.setAttribute('href', `film.html?id=${movie.id}`);
+      const linkMovie = document.createElement("a");
+      linkMovie.classList.add("movie-item");
+      linkMovie.setAttribute("data-id", `${movie.id}`);
+      linkMovie.setAttribute("href", `film.html?id=${movie.id}`);
       html = `
       <div class="img-container">
       <img src="${getMovieData(movie).src}" class="movie-cover" alt="movie"> 
@@ -95,9 +105,9 @@ async function searchItems(event) {
 
 function toggleTheme() {
   if (toggleThemes.checked) {
-    document.body.classList.add('dark-theme');
+    document.body.classList.add("dark-theme");
   } else {
-    document.body.classList.remove('dark-theme');
+    document.body.classList.remove("dark-theme");
   }
   dataStorage.toggle = toggleThemes.checked;
   store();

@@ -1,5 +1,5 @@
 const searchParams = new URLSearchParams(location.search);
-let id = searchParams.get('id') || 'all';
+let id = searchParams.get("id") || "all";
 let charactersAll = [];
 let dataStorage = restore();
 let favoriteItems = dataStorage.favorItem || [];
@@ -22,8 +22,9 @@ async function getCharacterInfo(characterID) {
 }
 
 async function getCharactersList() {
-  const character = await getCharacterInfo('all');
+  const character = await getCharacterInfo("all");
   const movie = await getMovie(id);
+  console.log(movie);
   if (charactersAll.length === 0) {
     movie.characters.map((item) => {
       charactersAll.push(character[item - 1]);
@@ -37,22 +38,22 @@ function getMovieData(data) {
 }
 
 function favoriteCountShow() {
-  const favoriteCount = document.querySelector('.favorites-items');
+  const favoriteCount = document.querySelector(".favorites-items");
   favoriteCount.textContent = `${favoriteItems.length}`;
 }
 
 function store() {
-  localStorage.setItem('dataStorage', JSON.stringify(dataStorage));
+  localStorage.setItem("dataStorage", JSON.stringify(dataStorage));
 }
 
 function restore() {
-  return JSON.parse(localStorage.getItem('dataStorage')) || {};
+  return JSON.parse(localStorage.getItem("dataStorage")) || {};
 }
 
 function storeMenu() {
-  localStorage.setItem('state', state);
+  localStorage.setItem("state", state);
 }
 
 function restoreMenu() {
-  return localStorage.getItem('state') || 'closed';
+  return localStorage.getItem("state") || "closed";
 }

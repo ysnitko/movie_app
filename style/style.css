@@ -281,7 +281,7 @@ h3 {
   display: block;
   width: 100%;
   border-radius: 10px;
-  aspect-ratio: 9 / 13;
+  aspect-ratio: 2 / 3;
   object-fit: cover;
 }
 
@@ -485,6 +485,8 @@ footer {
   display: block;
   width: 100%;
   margin: 0 auto;
+  aspect-ratio: 16/6;
+  object-fit: contain;
 }
 
 .favorites-cover {
@@ -795,6 +797,15 @@ footer {
   width: 70%;
   padding: 8px;
   font-size: 12px;
+  border: 1px solid;
+  outline: none;
+}
+
+.pass-validate {
+  outline: none;
+
+  border-color: var(--clr-timer);
+  color: var(--clr-timer);
 }
 
 .small_text {
@@ -862,8 +873,8 @@ footer {
   }
 
   .active-item img {
-    width: auto;
-    height: auto;
+    /* width: auto; */
+    height: 100%;
   }
 
   .movie-rating {
