@@ -3,7 +3,6 @@ const favorites = document.querySelector('.favorites');
 async function addToFavorites(event) {
   let target = event.target;
   let link = await renderFavorites(target.dataset.id);
-  console.log(link);
   let isFavorite = favoriteItems.some(
     (item) => item.target === target.dataset.id
   );

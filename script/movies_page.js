@@ -15,18 +15,16 @@ async function renderAllMovies() {
       linkMovie.setAttribute('data-id', `${movie.id}`);
       linkMovie.setAttribute('href', `film.html?id=${movie.id}`);
       html = `
-        <div class="img-container skeleton">
+        <div class="img-container">
         <img src="${getMovieData(movie).src}" class="movie-cover" alt="">  
         </div>
         <div class="movie-info">
-          <div class="movie-title skeleton"><span>${movie.title}</span></div>
-          <div class="movie-crawl skeleton"><span>${
-            movie.opening_crawl
-          }</span></div>
-          <div><span class="movie-created skeleton">Release date: ${
+          <div class="movie-title"><span>${movie.title}</span></div>
+          <div class="movie-crawl"><span>${movie.opening_crawl}</span></div>
+          <div><span class="movie-created">Release date: ${
             movie.release_date
           }</span></div>
-          <div class="movie-episode skeleton"><span class="episode-num">Episode: ${
+          <div class="movie-episode"><span class="episode-num">Episode: ${
             movie.episode_id
           }</span></div>
         </div>`;
@@ -36,7 +34,6 @@ async function renderAllMovies() {
     .forEach((movie) => {
       movieItems.append(movie);
     });
-  skeleton('skeleton');
   OnSortingItems();
   OnChangeLayout();
   toggleTheme();
@@ -97,7 +94,6 @@ function OnSortingItems() {
       return releaseDateB - releaseDateA;
     });
   }
-  store(select.selectedIndex);
   dataStorage.selected = select.selectedIndex;
   store();
   favoriteCountShow();

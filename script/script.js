@@ -105,10 +105,3 @@ function toggleTheme() {
 }
 
 toggleTheme();
-
-function skeleton(skeletonClass) {
-  const allSkeleton = document.querySelectorAll('.skeleton');
-  allSkeleton.forEach((item) => {
-    item.classList.remove(skeletonClass);
-  });
-}
