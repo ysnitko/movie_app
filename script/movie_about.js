@@ -2,7 +2,7 @@ renderMovieAbout();
 
 async function renderMovieAbout() {
   const movie = await getMovie(id);
-  const movieContainer = document.querySelector(".movies-container");
+  const movieContainer = document.querySelector('.movies-container');
   const html = `<div class="movie-about">
     <div class="movie-header">           
         <span>Star Wars: ${movie.title}. Episode ${movie.episode_id}</span>
@@ -47,30 +47,30 @@ async function renderMovieAbout() {
 }
 
 function changeBtnStyle() {
-  const favoriteBtn = document.querySelector(".add-favorites");
+  const favoriteBtn = document.querySelector('.add-favorites');
   favoriteItems.forEach((item) => {
     if (item.target === favoriteBtn.dataset.id) {
-      favoriteBtn.classList.add("in-favorites");
-      favoriteBtn.textContent = "Remove from Favorites";
+      favoriteBtn.classList.add('in-favorites');
+      favoriteBtn.textContent = 'Remove from Favorites';
     }
   });
 }
 
 async function renderMovieCharacters() {
-  const loadMoreButton = document.querySelector("#loadMoreCharacters");
-  const spinner = document.querySelector(".spinner");
-  loadMoreButton.classList.add("hidden");
-  spinner.classList.add("show");
+  const loadMoreButton = document.querySelector('#loadMoreCharacters');
+  const spinner = document.querySelector('.spinner');
+  loadMoreButton.classList.add('hidden');
+  spinner.classList.add('show');
   charactersAll = await getCharactersList();
   console.log(charactersAll);
   generateCharacters(charactersAll);
-  spinner.classList.remove("show");
-  loadMoreButton.classList.remove("hidden");
+  spinner.classList.remove('show');
+  loadMoreButton.classList.remove('hidden');
 }
 
 function generateCharacters(characters) {
   let count = 0;
-  const charactersContainer = document.querySelector(".characters-container");
+  const charactersContainer = document.querySelector('.characters-container');
   for (let index = 0; index < characters.length; index++) {
     if (
       charactersContainer.childElementCount % 7 !== 0 &&
@@ -82,18 +82,17 @@ function generateCharacters(characters) {
       return;
     }
     count++;
-    let element = document.createElement("a");
-    element.classList.add("character-link");
+    let element = document.createElement('a');
+    element.classList.add('character-link');
     element.setAttribute(
-      "href",
+      'href',
       `character.html?character=${characters[index].id}&film=${id}`
     );
-
     element.innerHTML = generateCharacter(characters[index]);
     charactersContainer.append(element);
 
     if (index >= characters.length - 1) {
-      document.querySelector("#loadMoreCharacters").remove();
+      document.querySelector('#loadMoreCharacters').remove();
       return;
     }
   }

@@ -803,7 +803,6 @@ footer {
 
 .pass-validate {
   outline: none;
-
   border-color: var(--clr-timer);
   color: var(--clr-timer);
 }
